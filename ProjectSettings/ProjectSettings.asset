@@ -454,6 +454,7 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 1
+    Collab: 1
     UNet: 1
   cloudProjectId: 3761dfac-4f13-4fa0-92b4-53a183a653e8
   projectName: unity-2d-btree
