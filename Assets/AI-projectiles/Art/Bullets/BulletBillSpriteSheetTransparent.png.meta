@@ -1,0 +1,524 @@
+fileFormatVersion: 2
+guid: d909d508ab8691c4f80d0f4611798de0
+timeCreated: 1479084821
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: BulletBill01
+    21300002: BulletBill02
+    21300004: BulletBill03
+    21300006: BulletBill04
+    21300008: BulletBill05
+    21300010: BulletBill06
+    21300012: BulletBill07
+    21300014: BulletBill08
+    21300016: BulletBill09
+    21300018: BulletBill10
+    21300020: BulletBillSpriteSheetTransparent_10
+    21300022: BulletBillSpriteSheetTransparent_11
+    21300024: BulletBillSpriteSheetTransparent_12
+    21300026: BulletBillSpriteSheetTransparent_13
+    21300028: BulletBillSpriteSheetTransparent_14
+    21300030: BulletBillSpriteSheetTransparent_15
+    21300032: BulletBillSpriteSheetTransparent_16
+    21300034: BulletBillSpriteSheetTransparent_17
+    21300036: BulletBillSpriteSheetTransparent_18
+    21300038: BulletBillSpriteSheetTransparent_19
+    21300040: BulletBillSpriteSheetTransparent_20
+    21300042: BulletBillSpriteSheetTransparent_21
+    21300044: BulletBillSpriteSheetTransparent_22
+    21300046: BulletBillSpriteSheetTransparent_23
+    21300048: BulletBillSpriteSheetTransparent_24
+    21300050: BulletBillSpriteSheetTransparent_25
+    21300052: BulletBillSpriteSheetTransparent_26
+    21300054: BulletBillSpriteSheetTransparent_27
+    21300056: BulletBillSpriteSheetTransparent_28
+    21300058: BulletBillSpriteSheetTransparent_29
+    21300060: BulletBillSpriteSheetTransparent_30
+    21300062: BulletBillSpriteSheetTransparent_31
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BulletBill01
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 476
+        width: 52
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill02
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 478
+        width: 52
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill03
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 476
+        width: 52
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill04
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 476
+        width: 52
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill05
+      rect:
+        serializedVersion: 2
+        x: 457
+        y: 476
+        width: 52
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill06
+      rect:
+        serializedVersion: 2
+        x: 514
+        y: 476
+        width: 52
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill07
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 476
+        width: 52
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill08
+      rect:
+        serializedVersion: 2
+        x: 627
+        y: 475
+        width: 52
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill09
+      rect:
+        serializedVersion: 2
+        x: 685
+        y: 476
+        width: 52
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBill10
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 476
+        width: 52
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_10
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 301
+        width: 240
+        height: 160
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_11
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 431
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_12
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 431
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_13
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 402
+        width: 214
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_14
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 410
+        width: 34
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_15
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 410
+        width: 34
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_16
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 384
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_17
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 384
+        width: 31
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_18
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 359
+        width: 34
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_19
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 359
+        width: 34
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_20
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 331
+        width: 34
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_21
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 331
+        width: 34
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_22
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 307
+        width: 33
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_23
+      rect:
+        serializedVersion: 2
+        x: 537
+        y: 306
+        width: 33
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_24
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 267
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_25
+      rect:
+        serializedVersion: 2
+        x: 258
+        y: 258
+        width: 31
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_26
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 263
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_27
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 267
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_28
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 267
+        width: 52
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_29
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 256
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_30
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 256
+        width: 25
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: BulletBillSpriteSheetTransparent_31
+      rect:
+        serializedVersion: 2
+        x: 463
+        y: 256
+        width: 10
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

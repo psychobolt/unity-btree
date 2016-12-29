@@ -1,0 +1,468 @@
+fileFormatVersion: 2
+guid: 39cf19726f5b6db4ba47d0bba970744c
+timeCreated: 1479008439
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Idle1
+    21300002: Idle2
+    21300004: Idle3
+    21300006: Portrait
+    21300008: MoveSideways1
+    21300010: MoveSideways2
+    21300012: PrepareSlash1
+    21300014: PrepareSlash2
+    21300016: PrepareSlash3
+    21300018: Slash1
+    21300020: Slash2
+    21300022: Slash3
+    21300024: Slash4
+    21300026: Slash5
+    21300028: FireLaser1
+    21300030: FireLaser2
+    21300032: FireLaser3
+    21300034: FireLaser4
+    21300036: FireLaser5
+    21300038: Mobile - Demon Hunter Legend 2 - Death_22
+    21300040: Mobile - Demon Hunter Legend 2 - Death_24
+    21300042: Teleport1
+    21300044: Teleport2
+    21300046: Laser1
+    21300048: Laser5
+    21300050: Laser4
+    21300052: Laser3
+    21300054: Laser2
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 40
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Idle1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 773
+        width: 122
+        height: 116
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle2
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 772
+        width: 122
+        height: 116
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Idle3
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 770
+        width: 122
+        height: 116
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Portrait
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 814
+        width: 67
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MoveSideways1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 646
+        width: 110
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: MoveSideways2
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 646
+        width: 110
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PrepareSlash1
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 483
+        width: 115
+        height: 150
+      alignment: 9
+      pivot: {x: 0.67, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PrepareSlash2
+      rect:
+        serializedVersion: 2
+        x: 152
+        y: 483
+        width: 115
+        height: 150
+      alignment: 9
+      pivot: {x: 0.67, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: PrepareSlash3
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 483
+        width: 115
+        height: 150
+      alignment: 9
+      pivot: {x: 0.67, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slash1
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 327
+        width: 165
+        height: 136
+      alignment: 9
+      pivot: {x: 0.4877003, y: 0.43533662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slash2
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 318
+        width: 166
+        height: 128
+      alignment: 9
+      pivot: {x: 0.4877744, y: 0.45243526}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slash3
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 317
+        width: 139
+        height: 98
+      alignment: 9
+      pivot: {x: 0.56813455, y: 0.59664047}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slash4
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 321
+        width: 110
+        height: 110
+      alignment: 9
+      pivot: {x: 0.46310148, y: 0.5307495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Slash5
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 320
+        width: 110
+        height: 110
+      alignment: 9
+      pivot: {x: 0.46310148, y: 0.5368991}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FireLaser1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 173
+        width: 128
+        height: 118
+      alignment: 9
+      pivot: {x: 0.4092952, y: 0.5382634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FireLaser2
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 173
+        width: 128
+        height: 118
+      alignment: 9
+      pivot: {x: 0.3941778, y: 0.5382634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FireLaser3
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 173
+        width: 128
+        height: 118
+      alignment: 9
+      pivot: {x: 0.44456935, y: 0.5382634}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FireLaser4
+      rect:
+        serializedVersion: 2
+        x: 396
+        y: 176
+        width: 112
+        height: 130
+      alignment: 9
+      pivot: {x: 0.6670118, y: 0.49503842}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: FireLaser5
+      rect:
+        serializedVersion: 2
+        x: 513
+        y: 176
+        width: 112
+        height: 130
+      alignment: 9
+      pivot: {x: 0.67853004, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mobile - Demon Hunter Legend 2 - Death_22
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 96
+        width: 4
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Mobile - Demon Hunter Legend 2 - Death_24
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 104
+        width: 4
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Teleport1
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 9
+        width: 111
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Teleport2
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 8
+        width: 15
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Laser1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 105
+        width: 111
+        height: 3
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Laser5
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 100
+        width: 111
+        height: 14
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Laser4
+      rect:
+        serializedVersion: 2
+        x: 507
+        y: 101
+        width: 111
+        height: 12
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Laser3
+      rect:
+        serializedVersion: 2
+        x: 394
+        y: 101
+        width: 111
+        height: 11
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Laser2
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 102
+        width: 111
+        height: 9
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
