@@ -6,10 +6,15 @@ using BTree;
 public class BTreeTickBehaviour : MonoBehaviour {
 
 	private BehaviourTree btree;
-
-	// Use this for initialization
+    
 	void Start () {
-		btree = new BehaviourTree(gameObject.GetComponent<Actor>().GetBehaviourTree(), gameObject);
+        List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
+        foreach(Component component in gameObject.GetComponents(typeof(AbstractBTreeBehaviour)))
+        {
+            AbstractBTreeBehaviour behaviour = (AbstractBTreeBehaviour)component;
+            behaviours.Add(behaviour.GetBehaviourTree());
+        }
+        btree = new BehaviourTree(new RepeatTreeNode(new SelectorTreeNode(behaviours.ToArray())), gameObject);
 	}
 	
 	// Update is called once per frame
