@@ -7,6 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
+[AddComponentMenu("AI Behaviour Tree/Range Attack")]
 public class RangeBehaviour : AbstractBTreeBehaviour
 {
     public float rangeRadius;

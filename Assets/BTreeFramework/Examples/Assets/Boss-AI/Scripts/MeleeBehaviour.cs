@@ -8,6 +8,7 @@ using Steer2D;
 [RequireComponent(typeof(BTreeTickBehaviour))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Seek))]
+[AddComponentMenu("AI Behaviour Tree/Melee Attack")]
 public class MeleeBehaviour : AbstractBTreeBehaviour
 {
     public float meleeDelay = 0.1f;

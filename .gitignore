@@ -7,6 +7,12 @@ UnityGenerated/
 Library/
 Standard Assets/
 
+# ============== #
+# BTreeFramework #
+# ============== #
+Assets/Editor/BTreeFramework/Templates/*.cs
+Assets/Editor/BTreeFramework/Templates/*.cs.meta
+
 # ===================================== #
 # Visual Studio / MonoDevelop generated #
 # ===================================== #

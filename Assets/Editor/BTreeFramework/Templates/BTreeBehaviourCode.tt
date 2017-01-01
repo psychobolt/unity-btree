@@ -1,0 +1,16 @@
+﻿<#@ template language="C#" #>
+
+using System;
+using System.Collections.Generic;
+using BTree;
+using UnityEngine;
+
+[RequireComponent(typeof(BTreeTickBehaviour))]
+[AddComponentMenu("AI Behaviour Tree/<#= className #>")]
+public class <#= className #> : AbstractBTreeBehaviour
+{
+    public override BehaviourTree.Node GetBehaviourTree()
+    {
+        throw new NotImplementedException();
+    }
+}
