@@ -36,7 +36,5 @@ Thumbs.db
 # ============== #
 # BTreeFramework #
 # ============== #
-Assets/Editor/BTreeFramework/Templates/*.cs
-Assets/Editor/BTreeFramework/Templates/*.cs.meta
 !unity-2d-btree.csproj
 !unity-2d-btree.Editor.csproj
