@@ -32,9 +32,3 @@ ExportedObj/
 Icon?
 ehthumbs.db
 Thumbs.db
-
-# ============== #
-# BTreeFramework #
-# ============== #
-!unity-2d-btree.csproj
-!unity-2d-btree.Editor.csproj
