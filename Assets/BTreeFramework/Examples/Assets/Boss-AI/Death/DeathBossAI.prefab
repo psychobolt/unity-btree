@@ -36,13 +36,20 @@ GameObject:
   - component: {fileID: 4706605353675468}
   - component: {fileID: 212714588569336348}
   - component: {fileID: 95794843798052424}
-  - component: {fileID: 114759973668179294}
-  - component: {fileID: 114307059482758682}
-  - component: {fileID: 58159742739168508}
   - component: {fileID: 50472411603321612}
+  - component: {fileID: 58159742739168508}
+  - component: {fileID: 114739530176530846}
+  - component: {fileID: 114759973668179294}
+  - component: {fileID: 114106535332197608}
   - component: {fileID: 114777652747098732}
   - component: {fileID: 114311789443242642}
+  - component: {fileID: 114632731990185688}
+  - component: {fileID: 114380277246055674}
   - component: {fileID: 114460199806575644}
+  - component: {fileID: 114966684176305346}
+  - component: {fileID: 114082365921172686}
+  - component: {fileID: 114455798689993138}
+  - component: {fileID: 114470370649165900}
   m_Layer: 0
   m_Name: DeathBossAI
   m_TagString: Untagged
@@ -128,7 +135,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114307059482758682
+--- !u!114 &114082365921172686
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -136,17 +143,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212820436488222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87edbe682fcce4d5ab93079fb644448c, type: 3}
+  m_Script: {fileID: 11500000, guid: 665682565a2b60347b1062812df1a4c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  prefab: {fileID: 1131734831181630, guid: bee82cfa119e6a74fb346d6377719bff, type: 2}
+  target: {fileID: 0}
+  fireFrom: {fileID: 1152041603085122}
+  projectileVelocity: 5
+  fireDelay: 0
+  fireRate: 1
+--- !u!114 &114106535332197608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d675718b8f645c04ab7ef2694c8fb07a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: Attack
   meleeDelay: 0.65
   meleeTime: 0.35
-  rangeDelay: 0.5
-  rangeTime: 2
-  rangeBehaviorName: ProjectileNova2D
-  mediumRadius: 4.5
-  smallRadius: 2.5
+  meleeRadius: 4.5
+  attackRadius: 2.5
 --- !u!114 &114311789443242642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,6 +181,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Weight: 1
   TargetPoint: {x: 0, y: 0}
+--- !u!114 &114380277246055674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84496acf0feacb54e843c37b827cdde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: Range
+  rangeRadius: 4.5
+  rangeDelay: 0.5
+  rangeTime: 2
+  rangeBehaviorName: ProjectileNova2D
+--- !u!114 &114455798689993138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5cd6fe2a1c2b54ab68ae84ef840b08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114460199806575644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,6 +225,43 @@ MonoBehaviour:
   projectileVelocity: 5
   fireDelay: 0
   fireRate: 2
+--- !u!114 &114470370649165900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5fdbe257a4fb94fbbe6bbc73919bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: 
+--- !u!114 &114632731990185688
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bdb91ec70a43d47889e4102bee89fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: Attack
+  groupName: Range
+--- !u!114 &114739530176530846
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87edbe682fcce4d5ab93079fb644448c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
 --- !u!114 &114759973668179294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,9 +270,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1212820436488222}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c31f256a6bf64ca09660f52b507e2cc, type: 3}
+  m_Script: {fileID: 11500000, guid: ab85ab27354dbda4c9f47882dfcbfe23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: 
+  groupName: Attack
 --- !u!114 &114777652747098732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +291,22 @@ MonoBehaviour:
   Friction: 0.05
   RotateSprite: 0
   CurrentVelocity: {x: 0, y: 0}
+--- !u!114 &114966684176305346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84496acf0feacb54e843c37b827cdde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: Range
+  rangeRadius: 4.5
+  rangeDelay: 0.5
+  rangeTime: 1
+  rangeBehaviorName: ProjectileFire2D
 --- !u!212 &212714588569336348
 SpriteRenderer:
   m_ObjectHideFlags: 1

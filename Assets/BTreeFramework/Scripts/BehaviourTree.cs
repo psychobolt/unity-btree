@@ -48,10 +48,16 @@ namespace BTree
 
             protected void setExecutionCount(Node node, int count)
             {
-                node.executionCount = count;
-                foreach (Node child in node.GetChildren())
+                try
                 {
-                    setExecutionCount(child, 0);
+                    node.executionCount = count;
+                    foreach (Node child in node.GetChildren())
+                    {
+                        setExecutionCount(child, 0);
+                    }
+                } catch (Exception e)
+                {
+                    return;
                 }
             }
             
@@ -67,6 +73,11 @@ namespace BTree
 		{
 			this.rootNode = rootNode;
 		}
+
+        public Node getRootNode()
+        {
+            return rootNode;
+        }
 
 		public void Tick()
         {

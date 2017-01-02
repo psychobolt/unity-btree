@@ -5,7 +5,7 @@ using BTree;
 using UnityEngine;
 using Steer2D;
 
-[RequireComponent(typeof(BTreeTickBehaviour))]
+[RequireComponent(typeof(BTreeSelectorGroup))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Seek))]
 [AddComponentMenu("AI Behaviour Tree/Melee Attack")]

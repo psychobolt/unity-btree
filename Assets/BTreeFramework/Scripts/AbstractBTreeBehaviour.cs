@@ -1,8 +1,9 @@
 ﻿using BTree;
 using UnityEngine;
 
-[RequireComponent(typeof(BTreeTickBehaviour))]
 public abstract class AbstractBTreeBehaviour : MonoBehaviour {
+
+    public string parent;
 
     public abstract BehaviourTree.Node GetBehaviourTree();
 
