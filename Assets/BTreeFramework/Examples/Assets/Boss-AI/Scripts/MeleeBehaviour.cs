@@ -15,14 +15,13 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
     public float meleeTime = 0.1f;
     public float meleeRadius;
     public float attackRadius;
-
-    private Animator animator;
+    
     private GameObject target;
     private Seek seek;
 
-    void Start()
+    protected override void Start()
     {
-        animator = gameObject.GetComponent<Animator>();
+        base.Start();
         seek = gameObject.GetComponent<Seek>();
     }
 
@@ -45,7 +44,14 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
     private float setLookAtX(Vector3 target)
     {
         float lookX = target.x - transform.position.x;
-        animator.SetFloat("lookX", lookX > 0 ? 1 : -1);
+        if (lookX < 0)
+        {
+            animationController.LookLeft();
+        }
+        else
+        {
+            animationController.LookRight();
+        }
         return lookX;
     }
 
@@ -75,13 +81,13 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State Idle(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("idle", true);
+        animationController.Idle();
         return BehaviourTree.State.SUCCESS;
     }
 
     public BehaviourTree.State Wake(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("idle", false);
+        animationController.Wake();
         return BehaviourTree.State.SUCCESS;
     }
 
@@ -90,16 +96,16 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
         if (target == null)
         {
             seek.TargetPoint = transform.position;
-            animator.SetBool("move", false);
+            animationController.Halt();
             return BehaviourTree.State.FAILURE;
         }
         seek.TargetPoint = target.transform.position;
-        animator.SetBool("move", true);
+        animationController.Move();
         setLookAtX(target.transform.position);
         if (IsTargetInMeleeAttackRange())
         {
             seek.TargetPoint = transform.position;
-            animator.SetBool("move", false);
+            animationController.Halt();
             return BehaviourTree.State.SUCCESS;
         }
         return BehaviourTree.State.RUNNING;
@@ -109,12 +115,10 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
     {
         if (target == null)
         {
-            animator.SetBool("melee", false);
-            animator.SetBool("prepare", false);
+            animationController.WithdrawMeleeAttack();
             return BehaviourTree.State.FAILURE;
         }
-        animator.SetBool("melee", true);
-        animator.SetBool("prepare", true);
+        animationController.PrepareMeleeAttack();
         setLookAtX(target.transform.position);
         node.Result += Time.deltaTime;
         if (node.Result > meleeDelay)
@@ -127,8 +131,7 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State MeleeAttack(BehaviourTreeNode<float> node)
     {
-        animator.SetBool("melee", true);
-        animator.SetBool("prepare", false);
+        animationController.MeleeAttack();
         node.Result += Time.deltaTime;
         if (node.Result > meleeTime)
         {
@@ -141,8 +144,7 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State WithdrawAttack(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("prepare", false);
-        animator.SetBool("melee", false);
+        animationController.WithdrawMeleeAttack();
         return BehaviourTree.State.SUCCESS;
     }
 

@@ -13,8 +13,8 @@ public class BTreeSelectorGroup : AbstractBTreeBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        if (string.IsNullOrEmpty(parent))
-        {
+        if (string.IsNullOrEmpty(parent)) {
+            GetBehaviourTree();
             btree.Tick();
         }
     }

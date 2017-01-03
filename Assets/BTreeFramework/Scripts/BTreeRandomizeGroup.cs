@@ -16,6 +16,7 @@ public class BTreeRandomizeGroup : AbstractBTreeBehaviour
     {
         if (string.IsNullOrEmpty(parent))
         {
+            GetBehaviourTree();
             btree.Tick();
         }
     }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [AddComponentMenu("AI Behaviour Tree/Range Attack")]
@@ -15,13 +14,12 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     public float rangeTime = 0.1f;
     public string rangeBehaviorName;
     private MonoBehaviour rangeBehavior;
-
-    private Animator animator;
+    
     private GameObject target;
 
-    void Start ()
+    protected override void Start ()
     {
-        animator = gameObject.GetComponent<Animator>();
+        base.Start();
         InitExternalBehaviors();
     }
 
@@ -57,7 +55,14 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     private float setLookAtX(Vector3 target)
     {
         float lookX = target.x - transform.position.x;
-        animator.SetFloat("lookX", lookX > 0 ? 1 : -1);
+        if (lookX < 0)
+        {
+            animationController.LookLeft();
+        }
+        else
+        {
+            animationController.LookRight();
+        }
         return lookX;
     }
 
@@ -77,13 +82,13 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State Idle(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("idle", true);
+        animationController.Idle();
         return BehaviourTree.State.SUCCESS;
     }
 
     public BehaviourTree.State Wake(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("idle", false);
+        animationController.Wake();
         return BehaviourTree.State.SUCCESS;
     }
 
@@ -101,12 +106,10 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     {
         if (target == null)
         {
-            animator.SetBool("range", false);
-            animator.SetBool("prepare", false);
+            animationController.WithdrawRangeAttack();
             return BehaviourTree.State.FAILURE;
         }
-        animator.SetBool("range", true);
-        animator.SetBool("prepare", true);
+        animationController.PrepareRangeAttack();
         setLookAtX(target.transform.position);
         node.Result += Time.deltaTime;
         if (node.Result > rangeDelay)
@@ -119,8 +122,7 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State RangeAttack(BehaviourTreeNode<float> node)
     {
-        animator.SetBool("range", true);
-        animator.SetBool("prepare", false);
+        animationController.RangeAttack();
         node.Result += Time.deltaTime;
         if (rangeBehavior)
         {
@@ -140,8 +142,7 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State WithdrawAttack(BehaviourTreeNode<System.Object> node)
     {
-        animator.SetBool("prepare", false);
-        animator.SetBool("range", false);
+        animationController.WithdrawRangeAttack();
         return BehaviourTree.State.SUCCESS;
     }
 

@@ -15,6 +15,7 @@ public class BTreeSequenceGroup : AbstractBTreeBehaviour
     {
         if (string.IsNullOrEmpty(parent))
         {
+            GetBehaviourTree();
             btree.Tick();
         }
     }
