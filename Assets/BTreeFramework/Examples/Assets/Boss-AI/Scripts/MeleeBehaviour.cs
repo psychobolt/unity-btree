@@ -64,7 +64,6 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
     {
         if (target != null && (target.transform.position - transform.position).magnitude <= meleeRadius)
         {
-            Debug.Log("Death is near for you!");
             return true;
         }
         return false;
@@ -135,7 +134,6 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
         node.Result += Time.deltaTime;
         if (node.Result > meleeTime)
         {
-            Debug.Log("Muahahaha!");
             node.Result = 0;
             return BehaviourTree.State.SUCCESS;
         }

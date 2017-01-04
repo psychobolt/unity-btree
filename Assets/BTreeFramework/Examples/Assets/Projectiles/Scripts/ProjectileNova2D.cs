@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileNova2D : MonoBehaviour {
+public class ProjectileNova2D : AbstractProjectileBehaviour {
 
     public int numberOfProjectiles;
     public GameObject prefab;
@@ -28,20 +29,7 @@ public class ProjectileNova2D : MonoBehaviour {
         //Fire
         else
         {
-            Vector2 center = transform.position;
-            for (int i = 0; i < numberOfProjectiles; i++)
-            {
-                //Get the projectile position with the given center
-                Vector2 pos = getProjectilePosition(center, i, 0.5f);
-
-                //Get the rotation each projectile should have 
-                Quaternion rot = Quaternion.FromToRotation(Vector2.left, pos - center);
-
-                //Instantiate each projectile and give a velocity in each's forward direction
-                GameObject projectile = Instantiate(prefab, pos, rot);
-                Rigidbody2D rigidbody = projectile.GetComponent<Rigidbody2D>();
-                rigidbody.velocity = (pos - center).normalized * projectileVelocity;
-            }
+            Fire();
             //Reset the fire timer
             fireDelay += fireRate;
         }
@@ -55,5 +43,23 @@ public class ProjectileNova2D : MonoBehaviour {
         position.x = center.x + r * Mathf.Sin(ang * Mathf.Deg2Rad);
         position.y = center.y + r * Mathf.Cos(ang * Mathf.Deg2Rad);
         return position;
+    }
+
+    public override void Fire()
+    {
+        Vector2 center = transform.position;
+        for (int i = 0; i < numberOfProjectiles; i++)
+        {
+            //Get the projectile position with the given center
+            Vector2 pos = getProjectilePosition(center, i, 0.5f);
+
+            //Get the rotation each projectile should have 
+            Quaternion rot = Quaternion.FromToRotation(Vector2.left, pos - center);
+
+            //Instantiate each projectile and give a velocity in each's forward direction
+            GameObject projectile = Instantiate(prefab, pos, rot);
+            Rigidbody2D rigidbody = projectile.GetComponent<Rigidbody2D>();
+            rigidbody.velocity = (pos - center).normalized * projectileVelocity;
+        }
     }
 }

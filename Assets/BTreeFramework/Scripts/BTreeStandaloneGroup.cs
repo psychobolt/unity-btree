@@ -12,7 +12,7 @@ public class BTreeStandaloneGroup : MonoBehaviour {
         foreach (Component component in gameObject.GetComponents(typeof(AbstractBTreeBehaviour)))
         {
             AbstractBTreeBehaviour behaviour = (AbstractBTreeBehaviour)component;
-            if (string.IsNullOrEmpty(behaviour.parent))
+            if (behaviour.enabled && string.IsNullOrEmpty(behaviour.parent))
             {
                 btrees.Add(new BehaviourTree(behaviour.GetBehaviourTree(), gameObject));
             }

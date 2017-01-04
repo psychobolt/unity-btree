@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSpray2D : MonoBehaviour {
+public class ProjectileSpray2D : AbstractProjectileBehaviour {
 
     public int numberOfProjectiles;
     public GameObject prefab;
@@ -28,21 +29,7 @@ public class ProjectileSpray2D : MonoBehaviour {
         //Fire
         else
         {
-            //Get the quaternion rotation from the shooter to the target
-            Vector2 destination = target.transform.position;
-            Vector2 center = fireFrom.transform.position;
-            Quaternion rot = Quaternion.FromToRotation(Vector2.left, destination - center);
-
-            int spread = numberOfProjectiles%2 == 0 ? numberOfProjectiles / 2 : (numberOfProjectiles - 1) / 2;
-            if(numberOfProjectiles%2 == 0)
-            {
-                fireSprayEven(spread, center, rot);
-            }
-            else
-            {
-                fireSprayOdd(spread, center, rot);
-            }
-
+            Fire();
             //Reset the fire timer
             fireDelay += fireRate;
 
@@ -102,5 +89,23 @@ public class ProjectileSpray2D : MonoBehaviour {
         position.x = center.x + r * Mathf.Sin(ang * Mathf.Deg2Rad);
         position.y = center.y + r * Mathf.Cos(ang * Mathf.Deg2Rad);
         return position;
+    }
+
+    public override void Fire()
+    {
+        //Get the quaternion rotation from the shooter to the target
+        Vector2 destination = target.transform.position;
+        Vector2 center = fireFrom.transform.position;
+        Quaternion rot = Quaternion.FromToRotation(Vector2.left, destination - center);
+
+        int spread = numberOfProjectiles % 2 == 0 ? numberOfProjectiles / 2 : (numberOfProjectiles - 1) / 2;
+        if (numberOfProjectiles % 2 == 0)
+        {
+            fireSprayEven(spread, center, rot);
+        }
+        else
+        {
+            fireSprayOdd(spread, center, rot);
+        }
     }
 }

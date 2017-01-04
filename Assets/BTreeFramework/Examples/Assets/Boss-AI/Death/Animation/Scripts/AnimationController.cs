@@ -4,16 +4,9 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class AnimationController
+public class AnimationController : AbstractAnimationController
 {
-    private Animator animator;
-
-    public AnimationController(Animator animator)
-    {
-        this.animator = animator;
-    }
-
-    public void Reset()
+    public override void ResetState()
     {
         Halt();
         WithdrawMeleeAttack();
@@ -21,79 +14,83 @@ public class AnimationController
         Idle();
     }
 
-    public void LookLeft()
+    public override void LookLeft()
     {
         animator.SetFloat("lookX", -1);
     }
 
-    public void LookRight()
+    public override void LookRight()
     {
         animator.SetFloat("lookX", 1);
     }
 
-    public void Idle()
+    public override void Idle()
     {
         animator.SetBool("idle", true);
     }
 
-    public void Wake()
+    public override void Wake()
     {
         animator.SetBool("idle", false);
     }
 
-    public void Disappear()
+    public override void Disappear()
     {
-        Reset();
+        ResetState();
         animator.SetBool("idle", false);
         animator.SetBool("disappear", true);
+        animator.SetBool("appear", false);
     }
 
-    public void Appear()
+    public override void Appear()
     {
         animator.SetBool("disappear", false);
+        animator.SetBool("appear", true);
     }
 
-    public void Move()
+    public override void Move()
     {
+        WithdrawMeleeAttack();
+        WithdrawRangeAttack();
         animator.SetBool("move", true);
     }
 
-    public void Halt()
+    public override void Halt()
     {
         animator.SetBool("move", false);
     }
 
-    public void PrepareMeleeAttack()
+    public override void PrepareMeleeAttack()
     {
         animator.SetBool("melee", true);
         animator.SetBool("prepare", true);
     }
 
-    public void MeleeAttack()
+    public override void MeleeAttack()
     {
         animator.SetBool("melee", true);
         animator.SetBool("prepare", false);
     }
 
-    public void WithdrawMeleeAttack()
+    public override void WithdrawMeleeAttack()
     {
         animator.SetBool("prepare", false);
         animator.SetBool("melee", false);
     }
 
-    public void PrepareRangeAttack()
+    public override void PrepareRangeAttack()
     {
         animator.SetBool("range", true);
         animator.SetBool("prepare", true);
     }
 
-    public void RangeAttack()
+    public override void RangeAttack()
     {
         animator.SetBool("range", true);
         animator.SetBool("prepare", false);
     }
 
-    public void WithdrawRangeAttack()
+    public override void WithdrawRangeAttack()
     {
         animator.SetBool("range", false);
         animator.SetBool("prepare", false);

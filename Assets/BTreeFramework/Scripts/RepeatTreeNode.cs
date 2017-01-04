@@ -30,6 +30,7 @@ namespace BTree
                 setExecutionCount(child, 0);
             }
             node.Tick(tree);
+            State = node.State;
         }
 
         public override BehaviourTree.Node[] GetChildren()

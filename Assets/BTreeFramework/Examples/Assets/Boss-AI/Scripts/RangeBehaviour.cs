@@ -12,8 +12,8 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     public float rangeRadius;
     public float rangeDelay = 0.1f;
     public float rangeTime = 0.1f;
-    public string rangeBehaviorName;
-    private MonoBehaviour rangeBehavior;
+    public string projectileBehaviorName;
+    private AbstractProjectileBehaviour projectileBehavior;
     
     private GameObject target;
 
@@ -25,13 +25,13 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     private void InitExternalBehaviors()
     {
-        foreach (Component component in gameObject.GetComponents(typeof(MonoBehaviour)))
+        foreach (Component component in gameObject.GetComponents(typeof(AbstractProjectileBehaviour)))
         {
-            MonoBehaviour behavior = (MonoBehaviour)component;
-            if (component.GetType().ToString() == rangeBehaviorName)
+            AbstractProjectileBehaviour behavior = (AbstractProjectileBehaviour)component;
+            if (component.GetType().ToString() == projectileBehaviorName)
             {
-                rangeBehavior = behavior;
-                rangeBehavior.enabled = false;
+                projectileBehavior = behavior;
+                projectileBehavior.enabled = false;
             }
         }
     }
@@ -123,18 +123,14 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     public BehaviourTree.State RangeAttack(BehaviourTreeNode<float> node)
     {
         animationController.RangeAttack();
-        node.Result += Time.deltaTime;
-        if (rangeBehavior)
+        if (projectileBehavior && node.Result == 0f)
         {
-            rangeBehavior.enabled = true;
+            projectileBehavior.Fire();
         }
+        node.Result += Time.deltaTime;
         if (node.Result > rangeTime)
         {
             node.Result = 0;
-            if (rangeBehavior)
-            {
-                rangeBehavior.enabled = false;
-            }
             return BehaviourTree.State.SUCCESS;
         }
         return BehaviourTree.State.RUNNING;
