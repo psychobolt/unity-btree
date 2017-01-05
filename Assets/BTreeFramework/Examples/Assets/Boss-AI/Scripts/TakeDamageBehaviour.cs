@@ -25,7 +25,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
     
     public bool IsLowHealth()
     {
-        return ((actor.totalHP - actor.health) / actor.totalHP) >= hitPercentage;
+        return ((actor.totalHP - actor.health) / actor.totalHP) * 100 >= hitPercentage;
     }
 
     public BehaviourTree.State Disappear(BehaviourTreeNode<float> node)
