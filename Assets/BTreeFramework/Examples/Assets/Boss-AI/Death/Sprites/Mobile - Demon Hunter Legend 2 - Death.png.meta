@@ -1,37 +1,37 @@
 fileFormatVersion: 2
 guid: 39cf19726f5b6db4ba47d0bba970744c
-timeCreated: 1479008439
+timeCreated: 1483638001
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Idle1
-    21300002: Idle2
-    21300004: Idle3
-    21300006: Portrait
-    21300008: MoveSideways1
-    21300010: MoveSideways2
-    21300012: PrepareSlash1
-    21300014: PrepareSlash2
-    21300016: PrepareSlash3
-    21300018: Slash1
-    21300020: Slash2
-    21300022: Slash3
-    21300024: Slash4
-    21300026: Slash5
-    21300028: FireLaser1
-    21300030: FireLaser2
-    21300032: FireLaser3
-    21300034: FireLaser4
-    21300036: FireLaser5
+    21300000: Death_Idle1
+    21300002: Death_Idle2
+    21300004: Death_Idle3
+    21300006: Death_Portrait
+    21300008: Death_MoveSideways1
+    21300010: Death_MoveSideways2
+    21300012: Death_PrepareSlash1
+    21300014: Death_PrepareSlash2
+    21300016: Death_PrepareSlash3
+    21300018: Death_Slash1
+    21300020: Death_Slash2
+    21300022: Death_Slash3
+    21300024: Death_Slash4
+    21300026: Death_Slash5
+    21300028: Death_FireLaser1
+    21300030: Death_FireLaser2
+    21300032: Death_FireLaser3
+    21300034: Death_FireLaser4
+    21300036: Death_FireLaser5
     21300038: Mobile - Demon Hunter Legend 2 - Death_22
     21300040: Mobile - Demon Hunter Legend 2 - Death_24
-    21300042: Teleport1
-    21300044: Teleport2
-    21300046: Laser1
-    21300048: Laser5
-    21300050: Laser4
-    21300052: Laser3
-    21300054: Laser2
+    21300042: Death_Teleport1
+    21300044: Death_Teleport2
+    21300046: Death_Laser1
+    21300048: Death_Laser5
+    21300050: Death_Laser4
+    21300052: Death_Laser3
+    21300054: Death_Laser2
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -94,11 +94,19 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Idle1
+      name: Death_Idle1
       rect:
         serializedVersion: 2
         x: 2
@@ -111,7 +119,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Idle2
+      name: Death_Idle2
       rect:
         serializedVersion: 2
         x: 127
@@ -124,7 +132,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Idle3
+      name: Death_Idle3
       rect:
         serializedVersion: 2
         x: 254
@@ -137,7 +145,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Portrait
+      name: Death_Portrait
       rect:
         serializedVersion: 2
         x: 450
@@ -150,7 +158,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: MoveSideways1
+      name: Death_MoveSideways1
       rect:
         serializedVersion: 2
         x: 4
@@ -163,7 +171,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: MoveSideways2
+      name: Death_MoveSideways2
       rect:
         serializedVersion: 2
         x: 117
@@ -176,7 +184,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PrepareSlash1
+      name: Death_PrepareSlash1
       rect:
         serializedVersion: 2
         x: 19
@@ -189,7 +197,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PrepareSlash2
+      name: Death_PrepareSlash2
       rect:
         serializedVersion: 2
         x: 152
@@ -202,7 +210,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: PrepareSlash3
+      name: Death_PrepareSlash3
       rect:
         serializedVersion: 2
         x: 279
@@ -215,7 +223,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slash1
+      name: Death_Slash1
       rect:
         serializedVersion: 2
         x: 2
@@ -228,7 +236,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slash2
+      name: Death_Slash2
       rect:
         serializedVersion: 2
         x: 175
@@ -241,7 +249,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slash3
+      name: Death_Slash3
       rect:
         serializedVersion: 2
         x: 348
@@ -254,7 +262,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slash4
+      name: Death_Slash4
       rect:
         serializedVersion: 2
         x: 500
@@ -267,7 +275,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Slash5
+      name: Death_Slash5
       rect:
         serializedVersion: 2
         x: 618
@@ -280,7 +288,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FireLaser1
+      name: Death_FireLaser1
       rect:
         serializedVersion: 2
         x: 4
@@ -293,7 +301,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FireLaser2
+      name: Death_FireLaser2
       rect:
         serializedVersion: 2
         x: 137
@@ -306,7 +314,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FireLaser3
+      name: Death_FireLaser3
       rect:
         serializedVersion: 2
         x: 267
@@ -319,7 +327,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FireLaser4
+      name: Death_FireLaser4
       rect:
         serializedVersion: 2
         x: 396
@@ -332,7 +340,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: FireLaser5
+      name: Death_FireLaser5
       rect:
         serializedVersion: 2
         x: 513
@@ -371,7 +379,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Teleport1
+      name: Death_Teleport1
       rect:
         serializedVersion: 2
         x: 50
@@ -384,7 +392,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Teleport2
+      name: Death_Teleport2
       rect:
         serializedVersion: 2
         x: 24
@@ -397,7 +405,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Laser1
+      name: Death_Laser1
       rect:
         serializedVersion: 2
         x: 167
@@ -410,7 +418,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Laser5
+      name: Death_Laser5
       rect:
         serializedVersion: 2
         x: 621
@@ -423,7 +431,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Laser4
+      name: Death_Laser4
       rect:
         serializedVersion: 2
         x: 507
@@ -436,7 +444,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Laser3
+      name: Death_Laser3
       rect:
         serializedVersion: 2
         x: 394
@@ -449,7 +457,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Laser2
+      name: Death_Laser2
       rect:
         serializedVersion: 2
         x: 281

@@ -10,13 +10,29 @@ public class EnemyAIActor : MonoBehaviour {
     public float health = 100;
     public float totalHP = 100;
 
+	private GameObject target;
+	private bool bodyCollision;
+
     public void TakeDamage(float damage)
     {
-        health -= damage;
+		float health = this.health - damage;
+		this.health = health < 0 ? 0 : health;
     }
 
-    public void Revive()
-    {
-        health = totalHP;
-    }
+	public void SetTarget(GameObject target) {
+		this.target = target;
+	}
+
+	public void SetTarget(GameObject target, bool bodyCollision) {
+		SetTarget(target);
+		this.bodyCollision = bodyCollision;
+	}
+
+	public GameObject GetTarget() {
+		return target;
+	}
+
+	public bool IsBodyCollision() {
+		return bodyCollision;
+	}
 }

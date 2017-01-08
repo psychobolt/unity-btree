@@ -5,6 +5,7 @@ using BTree;
 using UnityEngine;
 using Steer2D;
 
+[RequireComponent(typeof(EnemyAIActor))]
 [RequireComponent(typeof(BTreeSelectorGroup))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Seek))]
@@ -16,29 +17,14 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
     public float meleeRadius;
     public float attackRadius;
     
-    private GameObject target;
+	private EnemyAIActor actor;
     private Seek seek;
 
     protected override void Start()
     {
         base.Start();
+		actor = gameObject.GetComponent<EnemyAIActor>();
         seek = gameObject.GetComponent<Seek>();
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            target = collider.gameObject;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            target = null;
-        }
     }
 
     private float setLookAtX(Vector3 target)
@@ -57,12 +43,12 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public bool IsTargetInRange()
     {
-        return target != null;
+		return actor.GetTarget() != null;
     }
 
     public bool IsTargetInMeleeRange()
     {
-        if (target != null && (target.transform.position - transform.position).magnitude <= meleeRadius)
+		if (actor.GetTarget() != null && (actor.GetTarget().transform.position - transform.position).magnitude <= meleeRadius)
         {
             return true;
         }
@@ -71,7 +57,7 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public bool IsTargetInMeleeAttackRange()
     {
-        if (target != null && (target.transform.position - transform.position).magnitude <= attackRadius)
+		if (actor.GetTarget() != null && (actor.GetTarget().transform.position - transform.position).magnitude <= attackRadius)
         {
             return true;
         }
@@ -92,15 +78,15 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State MoveTowardsTarget(BehaviourTreeNode<System.Object> node)
     {
-        if (target == null)
+		if (actor.GetTarget() == null)
         {
             seek.TargetPoint = transform.position;
             animationController.Halt();
             return BehaviourTree.State.FAILURE;
         }
-        seek.TargetPoint = target.transform.position;
+		seek.TargetPoint = actor.GetTarget().transform.position;
         animationController.Move();
-        setLookAtX(target.transform.position);
+		setLookAtX(actor.GetTarget().transform.position);
         if (IsTargetInMeleeAttackRange())
         {
             seek.TargetPoint = transform.position;
@@ -112,13 +98,13 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State PrepareMeleeAttack(BehaviourTreeNode<float> node)
     {
-        if (target == null)
+		if (actor.GetTarget() == null)
         {
             animationController.WithdrawMeleeAttack();
             return BehaviourTree.State.FAILURE;
         }
         animationController.PrepareMeleeAttack();
-        setLookAtX(target.transform.position);
+		setLookAtX(actor.GetTarget().transform.position);
         node.Result += Time.deltaTime;
         if (node.Result > meleeDelay)
         {
@@ -146,7 +132,7 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
         return BehaviourTree.State.SUCCESS;
     }
 
-    public override BehaviourTree.Node GetBehaviourTree()
+    protected override BehaviourTree.Node Initialize()
     {
         return new BinaryTreeNode(
             IsTargetInRange,

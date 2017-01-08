@@ -2,6 +2,7 @@
 using UnityEngine;
 using BTree;
 using System.Collections.Generic;
+using UniRx;
 
 namespace BTree
 {
@@ -9,36 +10,54 @@ namespace BTree
 	{
         public enum State
         {
+			INITIALIZED,
             WAITING,
             SUCCESS,
             FAILURE,
-            RUNNING
+            RUNNING,
+			TERMINATED
         }
 
         public abstract class Node
         {
-            public State State { set; get; }
+			protected internal State State { 
+				set {
+					if (_state != value) {
+						_state = value;
+						observable.OnNext(_state);
+					}
+				}
+				get { return _state; } 
+			}
+			protected Subject<State> observable = new Subject<State>();
 
             private int executionCount = 0;
             private int executionLimit = 1;
 
+			private State _state;
+
             public bool IsComplete()
             {
-                return State == State.SUCCESS || State == State.FAILURE;
+				return State == State.TERMINATED || State == State.SUCCESS || State == State.FAILURE;
             }
 
             public virtual void Tick(BehaviourTree tree)
             {
-                if (executionCount == executionLimit)
+				if (tree.locked) 
+				{
+					State = State.TERMINATED;
+					return;
+				} 
+				else if (executionCount == executionLimit)
                 {
                     return;
-                }
-                if (State != State.RUNNING)
+                } 
+				else if (State != State.RUNNING)
                 {
                     State = State.WAITING;
                 }
                 tree.Queue(this);
-                Execute(tree);
+				Execute(tree);
                 if (IsComplete())
                 {
                     executionCount++;
@@ -46,18 +65,16 @@ namespace BTree
                 }
             }
 
+			public IObservable<State> OnExecute() {
+				return observable;
+			}
+
             protected void setExecutionCount(Node node, int count)
             {
-                try
+                node.executionCount = count;
+                foreach (Node child in node.GetChildren())
                 {
-                    node.executionCount = count;
-                    foreach (Node child in node.GetChildren())
-                    {
-                        setExecutionCount(child, 0);
-                    }
-                } catch (Exception e)
-                {
-                    return;
+                    setExecutionCount(child, 0);
                 }
             }
             
@@ -68,6 +85,7 @@ namespace BTree
 
         private Node rootNode;
         private Stack<Node> NodeQueue = new Stack<Node>();
+		private bool locked;
 
         public BehaviourTree (Node rootNode, GameObject actor)
 		{
@@ -95,6 +113,15 @@ namespace BTree
             Node node = NodeQueue.Pop();
             return node;
         }
+
+		public void Lock()
+		{
+			locked = true;
+		}
+
+		public void Unlock() {
+			locked = false;
+		}
 
         private Node GetCurrentNode(Node node)
         {

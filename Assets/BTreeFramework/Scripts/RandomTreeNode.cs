@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UniRx;
 
 namespace BTree
 {
@@ -14,6 +12,9 @@ namespace BTree
         public RandomTreeNode(BehaviourTree.Node[] children)
         {
             this.children = children;
+			foreach (BehaviourTree.Node child in children) {
+				child.OnExecute().Subscribe(State => this.State = State);
+			}
             random = new Random();
             currentChild = children[random.Next(children.Length)];
         }
@@ -25,7 +26,6 @@ namespace BTree
                 currentChild = children[random.Next(children.Length)];
             }
             currentChild.Tick(tree);
-            State = currentChild.State;
         }
 
         public override BehaviourTree.Node[] GetChildren()

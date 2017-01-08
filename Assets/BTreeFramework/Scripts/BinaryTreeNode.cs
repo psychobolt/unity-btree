@@ -1,4 +1,5 @@
 ﻿using System;
+using UniRx;
 
 namespace BTree
 {
@@ -13,16 +14,14 @@ namespace BTree
 			this.condition = condition;
 			this.actionIfTrue = actionIfTrue;
 			this.actionIfFalse = actionIfFalse;
+			actionIfTrue.OnExecute().Subscribe(State => this.State = State);
+			actionIfFalse.OnExecute().Subscribe(State => this.State = State);
         }
 
 		protected override void Execute(BehaviourTree tree) {
             Result = condition.Invoke();
             BehaviourTree.Node action = Result ? actionIfTrue : actionIfFalse;
             action.Tick(tree);
-            if (action.IsComplete())
-            {
-                State = action.State;
-            }
 		}
 
         public override BehaviourTree.Node[] GetChildren()

@@ -4,39 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class BTreeRandomizeGroup : AbstractBTreeBehaviour
+public class BTreeRandomizeGroup : AbstractBTreeGroup
 {
+	private BehaviourTree.Node rootNode;
 
-    public string groupName;
-
-    private BehaviourTree btree;
-	
-	// Update is called once per frame
-	void Update ()
+    protected override BehaviourTree.Node Initialize()
     {
-        if (string.IsNullOrEmpty(parent))
+        List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
+		foreach (AbstractBTreeBehaviour behaviour in gameObject.GetComponents<AbstractBTreeBehaviour>())
         {
-            GetBehaviourTree();
-            btree.Tick();
-        }
-    }
-
-    public override BehaviourTree.Node GetBehaviourTree()
-    {
-        if (btree == null)
-        {
-            List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
-            char[] delimiters = new[] { ';' };
-            foreach (Component component in gameObject.GetComponents(typeof(AbstractBTreeBehaviour)))
+			if (behaviour.enabled && Array.Exists(behaviour.parents, parent => parent == groupName))
             {
-                AbstractBTreeBehaviour behaviour = (AbstractBTreeBehaviour)component;
-                if (behaviour.enabled && Array.Exists(behaviour.parent.Split(delimiters), parent => parent == groupName))
-                {
-                    behaviours.Add(behaviour.GetBehaviourTree());
-                }
+				behaviours.Add(behaviour.GetBehaviourTree());
             }
-            btree = new BehaviourTree(new RepeatTreeNode(new RandomTreeNode(behaviours.ToArray())), gameObject);
         }
-        return btree.getRootNode();
+        return new RandomTreeNode(behaviours.ToArray());
     }
 }

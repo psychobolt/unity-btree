@@ -15,11 +15,12 @@ public class RangeBehaviour : AbstractBTreeBehaviour
     public string projectileBehaviorName;
     private AbstractProjectileBehaviour projectileBehavior;
     
-    private GameObject target;
+	private EnemyAIActor actor;
 
     protected override void Start ()
     {
         base.Start();
+		actor = gameObject.GetComponent<EnemyAIActor>();
         InitExternalBehaviors();
     }
 
@@ -33,22 +34,6 @@ public class RangeBehaviour : AbstractBTreeBehaviour
                 projectileBehavior = behavior;
                 projectileBehavior.enabled = false;
             }
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            target = collider.gameObject;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.gameObject.tag == "Player")
-        {
-            target = null;
         }
     }
     
@@ -68,12 +53,12 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     public bool IsTargetInRange()
     {
-        return target != null;
+		return actor.GetTarget() != null;
     }
 
     public bool IsTargetInRangeRadius()
     {
-        if (target != null && (target.transform.position - transform.position).magnitude > rangeRadius)
+		if (actor.GetTarget() != null && (actor.GetTarget().transform.position - transform.position).magnitude > rangeRadius)
         {
             return true;
         }
@@ -94,23 +79,23 @@ public class RangeBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State LookAtTarget(BehaviourTreeNode<System.Object> node)
     {
-        if (target == null)
+		if (actor.GetTarget() == null)
         {
             return BehaviourTree.State.SUCCESS;
         }
-        setLookAtX(target.transform.position);
+		setLookAtX(actor.GetTarget().transform.position);
         return BehaviourTree.State.SUCCESS;
     }
 
     public BehaviourTree.State PrepareRangeAttack(BehaviourTreeNode<float> node)
     {
-        if (target == null)
+		if (actor.GetTarget() == null)
         {
             animationController.WithdrawRangeAttack();
             return BehaviourTree.State.FAILURE;
         }
         animationController.PrepareRangeAttack();
-        setLookAtX(target.transform.position);
+		setLookAtX(actor.GetTarget().transform.position);
         node.Result += Time.deltaTime;
         if (node.Result > rangeDelay)
         {
@@ -142,7 +127,7 @@ public class RangeBehaviour : AbstractBTreeBehaviour
         return BehaviourTree.State.SUCCESS;
     }
 
-    public override BehaviourTree.Node GetBehaviourTree()
+    protected override BehaviourTree.Node Initialize()
     {
         return new BinaryTreeNode(
             IsTargetInRange,

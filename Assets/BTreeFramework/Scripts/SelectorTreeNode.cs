@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using UniRx;
 
 namespace BTree
 {
@@ -11,6 +10,14 @@ namespace BTree
 
         public SelectorTreeNode(BehaviourTree.Node[] children) {
             this.children = children;
+			foreach (BehaviourTree.Node child in children) {
+				child.OnExecute().Subscribe(state => { 
+					if (state != BehaviourTree.State.FAILURE || 
+						Array.IndexOf(children, child) == children.Length - 1) {
+						this.State = state;
+					}
+				});
+			}
         }
 
         protected override void Execute(BehaviourTree tree)
@@ -18,16 +25,15 @@ namespace BTree
             foreach(BehaviourTree.Node child in children)
             {
                 child.Tick(tree);
-                if (child.State == BehaviourTree.State.SUCCESS)
+				if (child.State == BehaviourTree.State.TERMINATED || child.State == BehaviourTree.State.SUCCESS)
                 {
-                    State = child.State;
-                    return;
-                } else if (!child.IsComplete())
+                    break;
+                } 
+				else if (!child.IsComplete())
                 {
                     return;
                 }
             }
-            State = BehaviourTree.State.FAILURE;
         }
 
         public override BehaviourTree.Node[] GetChildren()

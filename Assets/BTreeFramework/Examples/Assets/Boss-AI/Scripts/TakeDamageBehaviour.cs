@@ -37,6 +37,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
         node.Result += Time.deltaTime;
         if (node.Result > disappearAnimationTime)
         {
+			node.Result = 0;
             return BehaviourTree.State.SUCCESS;
         }
         return BehaviourTree.State.RUNNING;
@@ -66,7 +67,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
         return new Vector3(0f, 0f, 0f);
     }
 
-    public override BehaviourTree.Node GetBehaviourTree()
+    protected override BehaviourTree.Node Initialize()
     {
         return new BinaryTreeNode(
             IsLowHealth,
@@ -74,7 +75,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
             {
                 new ActionTreeNode<float>(Disappear),
                 new ActionTreeNode<float>(Appear),
-                new ActionTreeNode<System.Object>(actor.Revive)
+				new ActionTreeNode<System.Object>(() => actor.health = actor.totalHP)
             }),
             new ActionTreeNode<System.Object>(node => BehaviourTree.State.FAILURE)
         );
