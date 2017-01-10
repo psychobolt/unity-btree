@@ -25,6 +25,7 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
         base.Start();
 		actor = gameObject.GetComponent<EnemyAIActor>();
         seek = gameObject.GetComponent<Seek>();
+        seek.enabled = false;
     }
 
     private float setLookAtX(Vector3 target)
@@ -81,15 +82,18 @@ public class MeleeBehaviour : AbstractBTreeBehaviour
 		if (actor.GetTarget() == null)
         {
             seek.TargetPoint = transform.position;
+            seek.enabled = false;
             animationController.Halt();
             return BehaviourTree.State.FAILURE;
         }
-		seek.TargetPoint = actor.GetTarget().transform.position;
+        seek.TargetPoint = actor.GetTarget().transform.position;
+        seek.enabled = true;
         animationController.Move();
 		setLookAtX(actor.GetTarget().transform.position);
         if (IsTargetInMeleeAttackRange())
         {
             seek.TargetPoint = transform.position;
+            seek.enabled = false;
             animationController.Halt();
             return BehaviourTree.State.SUCCESS;
         }

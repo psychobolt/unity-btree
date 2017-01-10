@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using UniRx;
 
 namespace BTree
 {
     class SelectorTreeNode : BehaviourTree.Node
     {
-        private BehaviourTree.Node[] children;
-
-        public SelectorTreeNode(BehaviourTree.Node[] children) {
-            this.children = children;
-			foreach (BehaviourTree.Node child in children) {
-				child.OnExecute().Subscribe(state => { 
-					if (state != BehaviourTree.State.FAILURE || 
-						Array.IndexOf(children, child) == children.Length - 1) {
-						this.State = state;
-					}
-				});
-			}
+        public SelectorTreeNode(BehaviourTree.Node[] children) : base(children)
+        {
         }
 
         protected override void Execute(BehaviourTree tree)
@@ -29,16 +19,24 @@ namespace BTree
                 {
                     break;
                 } 
-				else if (!child.IsComplete())
+				else if (!child.IsTerminated())
                 {
                     return;
                 }
             }
         }
 
-        public override BehaviourTree.Node[] GetChildren()
+        public override BehaviourTree.Node[] GetNextChildren()
         {
-            return children;
+            return children.Where(child => !child.IsTerminated()).ToArray();
+        }
+
+        protected override void OnExecute(BehaviourTree.Node child)
+        {
+            if (child.State != BehaviourTree.State.FAILURE || Array.IndexOf(children, child) == children.Length - 1)
+            {
+                this.State = child.State;
+            }
         }
     }
 }

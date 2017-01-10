@@ -1,4 +1,7 @@
-﻿public abstract class AbstractBTreeGroup : AbstractBTreeBehaviour
+﻿namespace BTree
 {
-	public string groupName;
+    public abstract class AbstractBTreeGroup : AbstractBTreeBehaviour
+    {
+        public string groupName;
+    }
 }

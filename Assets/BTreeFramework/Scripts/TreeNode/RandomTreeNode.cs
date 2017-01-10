@@ -1,36 +1,40 @@
 ﻿using System;
-using UniRx;
+using System.Linq;
 
 namespace BTree
 {
     public class RandomTreeNode : BehaviourTree.Node
     {
-        private BehaviourTree.Node[] children;
         private Random random;
         private BehaviourTree.Node currentChild;
 
-        public RandomTreeNode(BehaviourTree.Node[] children)
+        public RandomTreeNode(BehaviourTree.Node[] children) : base(children)
         {
-            this.children = children;
-			foreach (BehaviourTree.Node child in children) {
-				child.OnExecute().Subscribe(State => this.State = State);
-			}
             random = new Random();
             currentChild = children[random.Next(children.Length)];
         }
 
         protected override void Execute(BehaviourTree tree)
         {
-            if (currentChild.IsComplete())
+            if (currentChild.IsTerminated())
             {
                 currentChild = children[random.Next(children.Length)];
             }
             currentChild.Tick(tree);
         }
 
-        public override BehaviourTree.Node[] GetChildren()
+        public override BehaviourTree.Node[] GetNextChildren()
         {
+            if (currentChild.IsTerminated())
+            {
+                return new BehaviourTree.Node[] { };
+            }
             return new BehaviourTree.Node[] { currentChild };
+        }
+
+        protected override void OnExecute(BehaviourTree.Node child)
+        {
+            this.State = child.State;
         }
     }
 }

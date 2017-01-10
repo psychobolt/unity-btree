@@ -6,14 +6,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(EnemyAIActor))]
 [RequireComponent(typeof(BTreeSelectorGroup))]
-[AddComponentMenu("AI Behaviour Tree/Respawn")]
+[AddComponentMenu("AI Behaviour Tree/Take Damage")]
 public class TakeDamageBehaviour : AbstractBTreeBehaviour
 {
     public float disappearAnimationTime = 1.0f;
     public float appearAnimationTime = 1.0f;
     public int hitPercentage = 100;
-    public float reappearDelay = 1.0f;
-    public bool randomPosition;
+    public int revivePrecentage = 100;
 
     private EnemyAIActor actor;
 
@@ -30,6 +29,10 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State Disappear(BehaviourTreeNode<float> node)
     {
+        if (disappearAnimationTime <= 0)
+        {
+            return BehaviourTree.State.SUCCESS;
+        }
         if (node.Result == 0)
         {
             animationController.Disappear();
@@ -45,6 +48,10 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
 
     public BehaviourTree.State Appear(BehaviourTreeNode<float> node)
     {
+        if (appearAnimationTime <= 0)
+        {
+            return BehaviourTree.State.SUCCESS;
+        }
         if (node.Result == 0)
         {
             animationController.Appear();
@@ -53,18 +60,19 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
         if (node.Result > appearAnimationTime)
         {
             node.Result = 0;
-            if (randomPosition)
-            {
-                gameObject.transform.position = GetRandomPosition();
-            }
             return BehaviourTree.State.SUCCESS;
         }
         return BehaviourTree.State.RUNNING;
     }
 
-    public Vector3 GetRandomPosition()
+    private Vector3 GetRandomPosition()
     {
         return new Vector3(0f, 0f, 0f);
+    }
+
+    private void Revive()
+    {
+        actor.health += (actor.totalHP - actor.health) * (revivePrecentage / 100);
     }
 
     protected override BehaviourTree.Node Initialize()
@@ -75,7 +83,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
             {
                 new ActionTreeNode<float>(Disappear),
                 new ActionTreeNode<float>(Appear),
-				new ActionTreeNode<System.Object>(() => actor.health = actor.totalHP)
+				new ActionTreeNode<System.Object>(Revive)
             }),
             new ActionTreeNode<System.Object>(node => BehaviourTree.State.FAILURE)
         );

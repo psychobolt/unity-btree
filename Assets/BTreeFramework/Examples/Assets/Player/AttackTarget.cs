@@ -14,17 +14,21 @@ public class AttackTarget : MonoBehaviour {
 		}
     }
 
-    void OnTriggerStay2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-        target = collider.gameObject.GetComponent<EnemyAIActor>();
+        EnemyAIActor target = collider.gameObject.GetComponent<EnemyAIActor>();
+        if (!target) {
+            target = collider.gameObject.GetComponentInParent<EnemyAIActor>();
+        }
 		if (target && target.IsBodyCollision()) {
-			return;
+            this.target = target;
 		}
     }
 
     void OnTriggerExit2D(Collider2D collider)
     {
-        if (collider.gameObject.GetComponent<EnemyAIActor>() == target)
+        if (collider.gameObject.GetComponent<EnemyAIActor>() == target ||
+            collider.gameObject.GetComponentInParent<EnemyAIActor>() == target)
         {
             target = null;
         }

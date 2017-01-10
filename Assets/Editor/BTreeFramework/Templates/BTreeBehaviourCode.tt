@@ -1,15 +1,11 @@
 ﻿<#@ template language="C#" linePragmas="false" #>
-
-using System;
-using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 
-[RequireComponent(typeof(BTreeStandaloneGroup))]
 [AddComponentMenu("AI Behaviour Tree/<#= behaviourName #>")]
 public class <#= className #> : AbstractBTreeBehaviour
 {
-    public override BehaviourTree.Node GetBehaviourTree()
+    protected override BehaviourTree.Node Initialize()
     {
         return new ActionTreeNode<System.Object>(node => BehaviourTree.State.SUCCESS);
     }

@@ -1,24 +1,23 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using BTree;
-using System;
 
-public class BTreeSelectorGroup : AbstractBTreeGroup
+namespace BTree
 {
-    private BehaviourTree.Node rootNode;
-
-    protected override BehaviourTree.Node Initialize()
+    public class BTreeSelectorGroup : AbstractBTreeGroup
     {
-        List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
-        foreach (Component component in gameObject.GetComponents(typeof(AbstractBTreeBehaviour)))
+        protected override BehaviourTree.Node Initialize()
         {
-            AbstractBTreeBehaviour behaviour = (AbstractBTreeBehaviour)component;
-            if (behaviour.enabled && Array.Exists(behaviour.parents, parent => parent == groupName))
+            List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
+            foreach (Component component in gameObject.GetComponents(typeof(AbstractBTreeBehaviour)))
             {
-                behaviours.Add(behaviour.GetBehaviourTree());
+                AbstractBTreeBehaviour behaviour = (AbstractBTreeBehaviour)component;
+                if (behaviour.enabled && Array.Exists(behaviour.parents, parent => parent == groupName))
+                {
+                    behaviours.Add(behaviour.GetBehaviourTree());
+                }
             }
+            return new SelectorTreeNode(behaviours.ToArray());
         }
-        return new SelectorTreeNode(behaviours.ToArray());
     }
 }

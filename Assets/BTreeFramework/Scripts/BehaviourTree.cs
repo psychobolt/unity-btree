@@ -1,12 +1,11 @@
-﻿using System;
-using UnityEngine;
-using BTree;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UniRx;
+using UnityEngine;
 
 namespace BTree
 {
-	public class BehaviourTree
+    public class BehaviourTree
 	{
         public enum State
         {
@@ -29,6 +28,7 @@ namespace BTree
 				}
 				get { return _state; } 
 			}
+            protected Node[] children;
 			protected Subject<State> observable = new Subject<State>();
 
             private int executionCount = 0;
@@ -36,9 +36,23 @@ namespace BTree
 
 			private State _state;
 
-            public bool IsComplete()
+            protected Node(Node[] children)
             {
-				return State == State.TERMINATED || State == State.SUCCESS || State == State.FAILURE;
+                this.children = children;
+                foreach (Node child in children)
+                {
+                    child.OnExecute().Subscribe(state => OnExecute(child));
+                }
+            }
+            
+            public Node[] GetChildren()
+            {
+                return children;
+            }
+
+            public bool IsTerminated()
+            {
+				return executionCount == executionLimit || State == State.TERMINATED || State == State.SUCCESS || State == State.FAILURE;
             }
 
             public virtual void Tick(BehaviourTree tree)
@@ -58,14 +72,14 @@ namespace BTree
                 }
                 tree.Queue(this);
 				Execute(tree);
-                if (IsComplete())
+                if (IsTerminated())
                 {
                     executionCount++;
                     tree.RemoveQueue();
                 }
             }
 
-			public IObservable<State> OnExecute() {
+			protected IObservable<State> OnExecute() {
 				return observable;
 			}
 
@@ -80,7 +94,9 @@ namespace BTree
             
             protected abstract void Execute(BehaviourTree tree);
 
-            public abstract Node[] GetChildren();
+            protected abstract void OnExecute(Node child);
+
+            public abstract Node[] GetNextChildren();
         }
 
         private Node rootNode;
@@ -128,17 +144,11 @@ namespace BTree
             while(NodeQueue.Count > 0)
             {
                 node = RemoveQueue();
-                if (node.GetChildren().Length > 0)
+                if (node.GetNextChildren().Length > 0)
                 {
-                    foreach (Node child in node.GetChildren())
-                    {
-                        if (!child.IsComplete())
-                        {
-                            return child;
-                        }
-                    }
+                    return node.GetNextChildren().First();
                 }
-                else if (!node.IsComplete())
+                else if (!node.IsTerminated())
                 {
                     return node;
                 }

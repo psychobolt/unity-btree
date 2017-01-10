@@ -1,16 +1,11 @@
-﻿using System;
-using UniRx;
+﻿using System.Linq;
 
 namespace BTree
 {
     public class RepeatTreeNode : BehaviourTree.Node
     {
-        private BehaviourTree.Node[] children;
-
-        public RepeatTreeNode(BehaviourTree.Node node)
+        public RepeatTreeNode(BehaviourTree.Node node) : base (new BehaviourTree.Node[] { node })
         {
-            children = new BehaviourTree.Node[] { node };
-			node.OnExecute().Subscribe(State => this.State = node.State);
         }
 
         public override void Tick(BehaviourTree tree)
@@ -28,9 +23,14 @@ namespace BTree
 			children[0].Tick(tree);
         }
 
-        public override BehaviourTree.Node[] GetChildren()
+        public override BehaviourTree.Node[] GetNextChildren()
         {
-            return children;
+            return children.Where(child => !child.IsTerminated()).ToArray();
+        }
+
+        protected override void OnExecute(BehaviourTree.Node child)
+        {
+            this.State = child.State;
         }
     }
 }

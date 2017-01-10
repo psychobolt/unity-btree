@@ -57,12 +57,16 @@ GameObject:
   - component: {fileID: 114287763505879726}
   - component: {fileID: 114739530176530846}
   - component: {fileID: 114569496700490100}
+  - component: {fileID: 114297199872441136}
   - component: {fileID: 114470370649165900}
+  - component: {fileID: 114062522275778984}
   - component: {fileID: 114951542958927204}
+  - component: {fileID: 114396834857286634}
+  - component: {fileID: 114871659703469826}
   - component: {fileID: 114759973668179294}
+  - component: {fileID: 114106535332197608}
   - component: {fileID: 114777652747098732}
   - component: {fileID: 114311789443242642}
-  - component: {fileID: 114106535332197608}
   - component: {fileID: 114632731990185688}
   - component: {fileID: 114380277246055674}
   - component: {fileID: 114460199806575644}
@@ -1663,6 +1667,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBodyCollision: 1
+--- !u!114 &114062522275778984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887e62bddfc30524dbf25608cf76bedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parents:
+  - TakeDamage
+  - Halt
+  groupName: Teleport
 --- !u!114 &114082365921172686
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1744,13 +1763,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be52cc35f3ff8284a954b3043a98ec1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114311789443242642
+--- !u!114 &114297199872441136
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212820436488222}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887e62bddfc30524dbf25608cf76bedc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parents:
+  - TakeDamage
+  groupName: Respawn
+--- !u!114 &114311789443242642
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4bdfd04e541a594fb04cf9957d61cf7, type: 3}
   m_Name: 
@@ -1786,6 +1819,24 @@ MonoBehaviour:
   rangeDelay: 0.5
   rangeTime: 1
   projectileBehaviorName: ProjectileNova2D
+--- !u!114 &114396834857286634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04a3a4546fb09964b84c0407c4e550f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parents:
+  - Teleport
+  target: {fileID: 1212820436488222}
+  freezeX: 0
+  freezeY: 0
+  freezeZ: 1
+  space: 0
 --- !u!114 &114460199806575644
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1815,13 +1866,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parents:
-  - TakeDamage
+  - Respawn
   - Halt
   disappearAnimationTime: 1
   appearAnimationTime: 1
   hitPercentage: 100
-  reappearDelay: 1
-  randomPosition: 1
+  revivePrecentage: 100
 --- !u!114 &114569496700490100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1896,7 +1946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87edbe682fcce4d5ab93079fb644448c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
+  health: 50
   totalHP: 100
 --- !u!114 &114741690933772596
 MonoBehaviour:
@@ -1912,7 +1962,7 @@ MonoBehaviour:
   groupName: Halt
   interuptRootGroups:
   - Attack
-  interruptOnState: 4
+  interruptOnStates: 0400000002000000
 --- !u!114 &114759973668179294
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1978,6 +2028,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBodyCollision: 0
+--- !u!114 &114871659703469826
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c5fdbe257a4fb94fbbe6bbc73919bc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parents:
+  - Teleport
+  disappearAnimationTime: 0
+  appearAnimationTime: 1
+  hitPercentage: 50
+  revivePrecentage: 100
 --- !u!114 &114947686444168750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2002,13 +2069,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parents:
-  - TakeDamage
-  - Halt
+  - Teleport
   disappearAnimationTime: 1
-  appearAnimationTime: 1
+  appearAnimationTime: 0
   hitPercentage: 50
-  reappearDelay: 1
-  randomPosition: 0
+  revivePrecentage: 0
 --- !u!114 &114966684176305346
 MonoBehaviour:
   m_ObjectHideFlags: 1

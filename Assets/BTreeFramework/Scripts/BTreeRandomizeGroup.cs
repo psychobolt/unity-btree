@@ -1,23 +1,21 @@
-﻿using BTree;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
-using System;
 
-public class BTreeRandomizeGroup : AbstractBTreeGroup
+namespace BTree
 {
-	private BehaviourTree.Node rootNode;
-
-    protected override BehaviourTree.Node Initialize()
+    public class BTreeRandomizeGroup : AbstractBTreeGroup
     {
-        List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
-		foreach (AbstractBTreeBehaviour behaviour in gameObject.GetComponents<AbstractBTreeBehaviour>())
+        protected override BehaviourTree.Node Initialize()
         {
-			if (behaviour.enabled && Array.Exists(behaviour.parents, parent => parent == groupName))
+            List<BehaviourTree.Node> behaviours = new List<BehaviourTree.Node>();
+            foreach (AbstractBTreeBehaviour behaviour in gameObject.GetComponents<AbstractBTreeBehaviour>())
             {
-				behaviours.Add(behaviour.GetBehaviourTree());
+                if (behaviour.enabled && Array.Exists(behaviour.parents, parent => parent == groupName))
+                {
+                    behaviours.Add(behaviour.GetBehaviourTree());
+                }
             }
+            return new RandomTreeNode(behaviours.ToArray());
         }
-        return new RandomTreeNode(behaviours.ToArray());
     }
 }

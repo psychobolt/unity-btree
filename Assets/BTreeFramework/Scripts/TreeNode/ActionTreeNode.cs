@@ -9,7 +9,7 @@ namespace BTree
 
         public delegate void Callback();
 
-        public ActionTreeNode (Callback action)
+        public ActionTreeNode (Callback action) : base(new BehaviourTree.Node[] { })
         {
             this.Action = (node) =>
             {
@@ -28,7 +28,7 @@ namespace BTree
             };
         }
 
-		public ActionTreeNode (Func<BehaviourTreeNode<T>, BehaviourTree.State> action)
+		public ActionTreeNode (Func<BehaviourTreeNode<T>, BehaviourTree.State> action) : base(new BehaviourTree.Node[] { })
 		{
 			this.Action = action;
 		}
@@ -38,9 +38,13 @@ namespace BTree
             State = Action.Invoke(this);
 		}
 
-        public override BehaviourTree.Node[] GetChildren()
+        protected override void OnExecute(BehaviourTree.Node child)
         {
-            return new BehaviourTree.Node[] { };
+        }
+
+        public override BehaviourTree.Node[] GetNextChildren()
+        {
+            return children;
         }
     }
 }

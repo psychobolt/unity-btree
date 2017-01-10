@@ -22,15 +22,13 @@ namespace Assets.Editor.BTreeFramework.Templates
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\nusing System;\r\nusing System.Collections.Generic;\r\nusing BTree;\r\nusing UnityEngi" +
-                    "ne;\r\n\r\n[RequireComponent(typeof(BTreeStandaloneGroup))]\r\n[AddComponentMenu(\"AI B" +
-                    "ehaviour Tree/");
+            this.Write("using BTree;\r\nusing UnityEngine;\r\n\r\n[AddComponentMenu(\"AI Behaviour Tree/");
             this.Write(this.ToStringHelper.ToStringWithCulture(behaviourName));
             this.Write("\")]\r\npublic class ");
             this.Write(this.ToStringHelper.ToStringWithCulture(className));
-            this.Write(" : AbstractBTreeBehaviour\r\n{\r\n    public override BehaviourTree.Node GetBehaviour" +
-                    "Tree()\r\n    {\r\n        return new ActionTreeNode<System.Object>(node => Behaviou" +
-                    "rTree.State.SUCCESS);\r\n    }\r\n}");
+            this.Write(" : AbstractBTreeBehaviour\r\n{\r\n    protected override BehaviourTree.Node Initializ" +
+                    "e()\r\n    {\r\n        return new ActionTreeNode<System.Object>(node => BehaviourTr" +
+                    "ee.State.SUCCESS);\r\n    }\r\n}");
             return this.GenerationEnvironment.ToString();
         }
     }
