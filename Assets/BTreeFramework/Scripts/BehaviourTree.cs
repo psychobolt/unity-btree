@@ -44,6 +44,10 @@ namespace BTree
                     child.OnExecute().Subscribe(state => OnExecute(child));
                 }
             }
+
+			public State GetState() {
+				return _state;
+			}
             
             public Node[] GetChildren()
             {
@@ -55,7 +59,7 @@ namespace BTree
 				return executionCount == executionLimit || State == State.TERMINATED || State == State.SUCCESS || State == State.FAILURE;
             }
 
-            public virtual void Tick(BehaviourTree tree)
+            protected internal virtual void Tick(BehaviourTree tree)
             {
 				if (tree.locked) 
 				{
@@ -64,9 +68,10 @@ namespace BTree
 				} 
 				else if (executionCount == executionLimit)
                 {
+					observable.OnNext(_state);
                     return;
                 } 
-				else if (State != State.RUNNING)
+				else if (State == State.INITIALIZED || IsTerminated())
                 {
                     State = State.WAITING;
                 }
@@ -108,7 +113,7 @@ namespace BTree
 			this.rootNode = rootNode;
 		}
 
-        public Node getRootNode()
+        public Node GetRootNode()
         {
             return rootNode;
         }

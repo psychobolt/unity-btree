@@ -1,13 +1,15 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 
 namespace BTree
 {
 	public class ActionTreeNode<T>: BehaviourTreeNode<T>
 	{
-		private Func<BehaviourTreeNode<T>, BehaviourTree.State> Action;
+		public delegate void Callback();
 
-        public delegate void Callback();
+		private Func<BehaviourTreeNode<T>, BehaviourTree.State> Action;
+		private IDisposable subscription;
 
         public ActionTreeNode (Callback action) : base(new BehaviourTree.Node[] { })
         {
@@ -27,6 +29,17 @@ namespace BTree
                 }
             };
         }
+
+		public ActionTreeNode(Func<BehaviourTreeNode<T>, IObservable<BehaviourTree.State>> action) : base(new BehaviourTree.Node[] { }) {
+			this.Action = (node) => {
+				if (State == BehaviourTree.State.WAITING) {
+					IObservable<BehaviourTree.State> observable = action.Invoke(this);
+					stream = GetStream().Merge(observable);
+					return BehaviourTree.State.RUNNING;
+				}
+				return State;
+			};
+		}
 
 		public ActionTreeNode (Func<BehaviourTreeNode<T>, BehaviourTree.State> action) : base(new BehaviourTree.Node[] { })
 		{

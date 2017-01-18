@@ -8,7 +8,7 @@ namespace BTree
         {
         }
 
-        public override void Tick(BehaviourTree tree)
+        protected override internal void Tick(BehaviourTree tree)
         {
             setExecutionCount(this, 0);
             base.Tick(tree);

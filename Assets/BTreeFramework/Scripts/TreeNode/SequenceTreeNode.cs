@@ -12,15 +12,12 @@ namespace BTree
 
         protected override void Execute(BehaviourTree tree)
         {
-            foreach (BehaviourTree.Node child in children)
+			foreach (BehaviourTree.Node child in children)
             {
-                child.Tick(tree);
-                if (!child.IsTerminated())
-                {
-                    return;
-                } 
-				else if (child.State != BehaviourTree.State.SUCCESS)
-				{
+				child.Tick(tree);
+				if (child.State == BehaviourTree.State.SUCCESS) {
+					continue;
+				} else {
 					break;
 				}
             }
@@ -33,7 +30,7 @@ namespace BTree
 
         protected override void OnExecute(BehaviourTree.Node child)
         {
-            if (child.State != BehaviourTree.State.SUCCESS ||  Array.IndexOf(children, child) == children.Length - 1)
+            if (child.State != BehaviourTree.State.SUCCESS || Array.IndexOf(children, child) == children.Length - 1)
             {
                 State = child.State;
             }

@@ -27,7 +27,7 @@ namespace BTree
             {
                 return new BehaviourTree.Node[] { actionIfTrue };
             }
-            else if (!actionIfFalse.IsTerminated())
+			else if (!Result && !actionIfFalse.IsTerminated())
             {
                 return new BehaviourTree.Node[] { actionIfFalse };
             }

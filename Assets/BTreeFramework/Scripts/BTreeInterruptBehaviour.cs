@@ -85,7 +85,7 @@ namespace BTree
 
         protected override void Execute(BehaviourTree tree)
         {
-            
+			children[0].Tick(tree);
         }
 
         protected override void OnExecute(BehaviourTree.Node child)

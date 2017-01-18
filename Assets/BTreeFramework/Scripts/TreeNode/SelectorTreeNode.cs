@@ -4,7 +4,7 @@ using UniRx;
 
 namespace BTree
 {
-    class SelectorTreeNode : BehaviourTree.Node
+    public class SelectorTreeNode : BehaviourTree.Node
     {
         public SelectorTreeNode(BehaviourTree.Node[] children) : base(children)
         {
@@ -12,17 +12,14 @@ namespace BTree
 
         protected override void Execute(BehaviourTree tree)
         {
-            foreach(BehaviourTree.Node child in children)
+			foreach(BehaviourTree.Node child in children)
             {
                 child.Tick(tree);
-				if (child.State == BehaviourTree.State.TERMINATED || child.State == BehaviourTree.State.SUCCESS)
-                {
-                    break;
-                } 
-				else if (!child.IsTerminated())
-                {
-                    return;
-                }
+				if (child.IsTerminated() && child.State == BehaviourTree.State.FAILURE) {
+					continue;
+				} else {
+					break;
+				}
             }
         }
 

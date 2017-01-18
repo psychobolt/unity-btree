@@ -2,6 +2,7 @@
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using System.Linq;
 
 namespace BTree
 {
@@ -17,7 +18,7 @@ namespace BTree
             Dictionary<string, BehaviourTree> groups = new Dictionary<string, BehaviourTree>();
             foreach (AbstractBTreeBehaviour behaviour in gameObject.GetComponents<AbstractBTreeBehaviour>())
             {
-                if (behaviour.enabled && behaviour.parents.Length == 0)
+				if (behaviour.enabled && (behaviour.parents.Length == 0 || behaviour.parents.Contains("")))
                 {
                     BehaviourTree btree = new BehaviourTree(new RepeatTreeNode(behaviour.GetBehaviourTree()), gameObject);
                     btrees.Add(btree);
@@ -31,9 +32,9 @@ namespace BTree
             groupsAsObservable.OnNext(groups);
             this.UpdateAsObservable().Subscribe(x =>
             {
-                foreach (BehaviourTree btree in btrees)
+				foreach (BehaviourTree btree in btrees)
                 {
-                    btree.Tick();
+					btree.Tick();
                 }
             });
         }
