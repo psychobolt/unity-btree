@@ -8,8 +8,15 @@ namespace BTree
 	{
 		public delegate void Callback();
 
-		private Func<BehaviourTreeNode<T>, BehaviourTree.State> Action;
-		private IDisposable subscription;
+		protected Func<BehaviourTreeNode<T>, BehaviourTree.State> Action;
+
+        protected ActionTreeNode () : base(new BehaviourTree.Node[] { })
+        {
+            this.Action = (node) =>
+            {
+                return BehaviourTree.State.SUCCESS;
+            };
+        }
 
         public ActionTreeNode (Callback action) : base(new BehaviourTree.Node[] { })
         {
@@ -30,17 +37,6 @@ namespace BTree
             };
         }
 
-		public ActionTreeNode(Func<BehaviourTreeNode<T>, IObservable<BehaviourTree.State>> action) : base(new BehaviourTree.Node[] { }) {
-			this.Action = (node) => {
-				if (State == BehaviourTree.State.WAITING) {
-					IObservable<BehaviourTree.State> observable = action.Invoke(this);
-					stream = GetStream().Merge(observable);
-					return BehaviourTree.State.RUNNING;
-				}
-				return State;
-			};
-		}
-
 		public ActionTreeNode (Func<BehaviourTreeNode<T>, BehaviourTree.State> action) : base(new BehaviourTree.Node[] { })
 		{
 			this.Action = action;
@@ -58,6 +54,23 @@ namespace BTree
         public override BehaviourTree.Node[] GetNextChildren()
         {
             return children;
+        }
+    }
+
+    public class ObservableActionTreeNode<T> : ActionTreeNode<T>
+    {
+        public ObservableActionTreeNode(Func<BehaviourTreeNode<T>, IObservable<BehaviourTree.State>> action) : base()
+        {
+            this.Action = (node) =>
+            {
+                if (State == BehaviourTree.State.WAITING)
+                {
+                    IObservable<BehaviourTree.State> observable = action.Invoke(this);
+                    stream = GetStream().Merge(observable);
+                    return BehaviourTree.State.RUNNING;
+                }
+                return State;
+            };
         }
     }
 }

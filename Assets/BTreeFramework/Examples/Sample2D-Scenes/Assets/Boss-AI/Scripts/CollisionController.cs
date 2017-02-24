@@ -9,7 +9,7 @@ public class CollisionController : MonoBehaviour {
 	private EnemyActor actor;
 
 	void Start() {
-		actor = transform.root.GetComponent<EnemyActor>();
+		actor = transform.root.GetComponentInChildren<EnemyActor>();
 		if (actor == null) {
 			actor = GetComponent<EnemyActor>();
 		}
