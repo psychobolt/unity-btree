@@ -49,6 +49,8 @@ public class DeathAnimationController : AbstractAnimationController
 			spriteRenderer.enabled = false;
 			takeDamage.SetActive(true);
 		} else {
+            takeDamage.SetActive(false);
+            spriteRenderer.enabled = true;
             animator.SetBool("disappear", true);
 	        animator.SetBool("appear", false);
         }

@@ -7,6 +7,7 @@ using UnityEngine;
 public class RelocateObjectBehaviour : AbstractBTreeBehaviour
 {
     public GameObject target;
+    public GameObject[] areas;
 
     public bool freezeX;
     public bool freezeY;
@@ -14,17 +15,9 @@ public class RelocateObjectBehaviour : AbstractBTreeBehaviour
 	public bool allowHidden;
     public bool failIfInvalid;
 
-    public Space space;
-
 	private Vector3 position;
 	private Vector3 size;
     private bool valid;
-
-    public enum Space
-    {
-        SCREEN,
-        WORLD
-    }
 
 	protected override void Start() {
 		base.Start();
@@ -32,44 +25,76 @@ public class RelocateObjectBehaviour : AbstractBTreeBehaviour
 	}
 
 	private void GetNewPosition() {
-		switch (space)
-		{
-			case Space.WORLD:
-				position = target.transform.position;
-				position = new Vector3(
-					freezeX ? position.x : Random.Range(float.MinValue, float.MaxValue),
-					freezeY ? position.y : Random.Range(float.MinValue, float.MaxValue),
-					freezeZ ? position.z : Random.Range(float.MinValue, float.MaxValue)
-				);
-				break;
-			default:
-				position = Camera.main.WorldToScreenPoint(position);
-				position = Camera.main.ScreenToWorldPoint(new Vector3(
-					freezeX ? position.x : Random.Range(0, Screen.width),
-					freezeY ? position.y : Random.Range(0, Screen.height),
-					freezeZ ? position.z : Camera.main.farClipPlane / 2
-				));
-				if (!allowHidden) {
-					float width = size.x / 2;
-					float height = size.y / 2;
-					Vector3 bottomLeft = Camera.main.ScreenToWorldPoint(Vector3.zero);
-					Vector3 topRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight));
-					Rect cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
-					position = new Vector3(
-						Mathf.Clamp(position.x, cameraRect.xMin + width, cameraRect.xMax - width),
-						Mathf.Clamp(position.y, cameraRect.yMin + height, cameraRect.yMax - height)
-					);
-				}
-				break;
-		}
+        System.Random random = new System.Random();
+        int index = random.Next(areas.Length);
+        GameObject area = areas[index];
+        Camera camera = area.GetComponent<Camera>();
+        SphereCollider sphereCollider = area.GetComponent<SphereCollider>();
+        CircleCollider2D circleCollider = area.GetComponent<CircleCollider2D>();
+        if (camera)
+        {
+            position = camera.WorldToScreenPoint(position);
+            position = camera.ScreenToWorldPoint(new Vector3(
+                freezeX ? position.x : Random.Range(0, Screen.width),
+                freezeY ? position.y : Random.Range(0, Screen.height),
+                freezeZ ? position.z : Camera.main.farClipPlane / 2
+            ));
+            if (!allowHidden)
+            {
+                float width = size.x / 2;
+                float height = size.y / 2;
+                Vector3 bottomLeft = camera.ScreenToWorldPoint(Vector3.zero);
+                Vector3 topRight = camera.ScreenToWorldPoint(new Vector3(camera.pixelWidth, camera.pixelHeight));
+                Rect cameraRect = new Rect(bottomLeft.x, bottomLeft.y, topRight.x - bottomLeft.x, topRight.y - bottomLeft.y);
+                position = new Vector3(
+                    Mathf.Clamp(position.x, cameraRect.xMin + width, cameraRect.xMax - width),
+                    Mathf.Clamp(position.y, cameraRect.yMin + height, cameraRect.yMax - height)
+                );
+            }
+        }
+        else if (sphereCollider)
+        {
+            Vector3 newPosition = area.transform.TransformPoint(sphereCollider.center) + sphereCollider.radius * Random.insideUnitSphere;
+            position = new Vector3(
+                freezeX ? position.x : newPosition.x,
+                freezeY ? position.y : newPosition.y,
+                freezeZ ? position.z : newPosition.z
+            );
+        }
+        else if (circleCollider)
+        {
+            Vector2 localPosition = circleCollider.radius* Random.insideUnitCircle;
+            Vector3 newPosition = area.transform.TransformPoint(circleCollider.offset) + new Vector3(localPosition.x, localPosition.y, 0);
+            position = new Vector3(
+                freezeX ? position.x : newPosition.x,
+                freezeY ? position.y : newPosition.y,
+                freezeZ ? position.z : newPosition.z
+            );
+        }
+        else {
+            position = target.transform.position;
+            position = new Vector3(
+                freezeX ? position.x : Random.Range(float.MinValue, float.MaxValue),
+                freezeY ? position.y : Random.Range(float.MinValue, float.MaxValue),
+                freezeZ ? position.z : Random.Range(float.MinValue, float.MaxValue)
+            );
+        }
 	}
 
 	public BehaviourTree.State IsValidPosition(BehaviourTreeNode<System.Object> node) {
 		BehaviourTree.State state = node.State;
-		Pathfinder2D.Instance.FindPath(gameObject.transform.position, position, path => {
-            valid = path.Count > 0;
-            state = !valid && failIfInvalid? BehaviourTree.State.FAILURE : BehaviourTree.State.SUCCESS;
-		});
+        try
+        {
+            Pathfinder2D.Instance.FindPath(gameObject.transform.position, position, path =>
+            {
+                valid = path.Count > 0;
+                state = !valid && failIfInvalid ? BehaviourTree.State.FAILURE : BehaviourTree.State.SUCCESS;
+            });
+        }
+        catch (System.IndexOutOfRangeException)
+        {
+            state = failIfInvalid ? BehaviourTree.State.FAILURE : BehaviourTree.State.SUCCESS;
+        }
 		return state;
 	}
 

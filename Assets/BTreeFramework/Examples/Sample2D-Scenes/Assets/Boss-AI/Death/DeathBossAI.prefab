@@ -409,7 +409,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212820436488222}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
@@ -1888,11 +1888,14 @@ MonoBehaviour:
   parents:
   - Teleport
   target: {fileID: 1212820436488222}
+  areas:
+  - {fileID: 0}
+  - {fileID: 0}
   freezeX: 0
   freezeY: 0
   freezeZ: 1
   allowHidden: 0
-  space: 0
+  failIfInvalid: 0
 --- !u!114 &114460199806575644
 MonoBehaviour:
   m_ObjectHideFlags: 1
