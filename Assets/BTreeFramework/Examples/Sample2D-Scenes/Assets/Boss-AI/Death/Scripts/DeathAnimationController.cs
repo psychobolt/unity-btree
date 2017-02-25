@@ -49,15 +49,15 @@ public class DeathAnimationController : AbstractAnimationController
 			spriteRenderer.enabled = false;
 			takeDamage.SetActive(true);
 		} else {
-	        animator.SetBool("disappear", true);
+            animator.SetBool("disappear", true);
 	        animator.SetBool("appear", false);
-		}
+        }
     }
 
     public override void Revive()
     {
-		spriteRenderer.enabled = true;
-		takeDamage.SetActive(false);
+        takeDamage.SetActive(false);
+        spriteRenderer.enabled = true;
         animator.SetBool("disappear", false);
         animator.SetBool("appear", true);
     }

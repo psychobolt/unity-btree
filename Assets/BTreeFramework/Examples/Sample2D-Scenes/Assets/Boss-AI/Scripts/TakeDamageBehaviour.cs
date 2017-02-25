@@ -68,7 +68,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
 	public BehaviourTree.State Cooldown(BehaviourTreeNode<System.Object> node)
 	{
 		if (cooldown) {
-			return BehaviourTree.State.FAILURE;
+            return BehaviourTree.State.FAILURE;
 		}
 		return BehaviourTree.State.SUCCESS;
 	}
@@ -111,15 +111,13 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
         return BehaviourTree.State.RUNNING;
     }
 
-    private Vector3 GetRandomPosition()
-    {
-        return new Vector3(0f, 0f, 0f);
-    }
-
     private void Revive()
     {
-        actor.health += (actor.totalHP - actor.health) * (revivePrecentage / 100);
-		lastHealth = actor.health;
+        if (revivePrecentage > 0)
+        {
+            actor.health += (actor.totalHP - actor.health) * (revivePrecentage / 100);
+            lastHealth = actor.health;
+        }
     }
 
 	private void StartCooldown() {

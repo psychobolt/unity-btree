@@ -12,11 +12,13 @@ public class RelocateObjectBehaviour : AbstractBTreeBehaviour
     public bool freezeY;
     public bool freezeZ;
 	public bool allowHidden;
+    public bool failIfInvalid;
 
     public Space space;
 
 	private Vector3 position;
 	private Vector3 size;
+    private bool valid;
 
     public enum Space
     {
@@ -65,14 +67,17 @@ public class RelocateObjectBehaviour : AbstractBTreeBehaviour
 	public BehaviourTree.State IsValidPosition(BehaviourTreeNode<System.Object> node) {
 		BehaviourTree.State state = node.State;
 		Pathfinder2D.Instance.FindPath(gameObject.transform.position, position, path => {
-			state = path.Count == 0 ? BehaviourTree.State.FAILURE : BehaviourTree.State.SUCCESS;
+            valid = path.Count > 0;
+            state = !valid && failIfInvalid? BehaviourTree.State.FAILURE : BehaviourTree.State.SUCCESS;
 		});
 		return state;
 	}
 
     private void Relocate()
     {
-		gameObject.transform.position = position;
+        if (valid) {
+            gameObject.transform.position = position;
+        }
     }
 
     protected override BehaviourTree.Node Initialize()
