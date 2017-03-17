@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using System.Linq;
 using UniRx;
-using UnityEngine;
+using UniRx.Triggers;
 
 namespace BTree
 {
-    public class BTreeInterruptBehaviour : MonoBehaviour
+    public class BTreeInterruptBehaviour : ObservableTriggerBase
     {
 
         public string groupName;
         public string[] interuptRootGroups = new string[] { };
         public BehaviourTree.State[] interruptOnStates;
 
+        private List<AbstractBTreeBehaviour> children;
         private HashSet<string> interruptGroups;
         private BTreeTickBehaviour tickBehaviour;
+        private IDisposable subscription;
 
         void Start()
         {
+            children = new List<AbstractBTreeBehaviour>();
             interruptGroups = new HashSet<string>();
             tickBehaviour = gameObject.GetComponent<BTreeTickBehaviour>();
             if (!tickBehaviour)
@@ -27,83 +30,49 @@ namespace BTree
             AbstractBTreeBehaviour[] behaviours = gameObject.GetComponents<AbstractBTreeBehaviour>();
             foreach (AbstractBTreeBehaviour behaviour in behaviours)
             {
-                if (!behaviour.enabled)
+                if (behaviour.enabled)
                 {
-                    continue;
-                }
-                if (behaviour is AbstractBTreeGroup)
-                {
-                    AbstractBTreeGroup group = (AbstractBTreeGroup)behaviour;
-                    if (Array.Exists(interuptRootGroups, root => root == group.groupName))
+                    if (Array.Exists(behaviour.parents, parent => parent == groupName))
                     {
-                        group = (AbstractBTreeGroup)behaviour.GetRoot();
-                        interruptGroups.Add(group.groupName);
+                        children.Add(behaviour);
+                    }
+                    if (behaviour is AbstractBTreeGroup)
+                    {
+                        AbstractBTreeGroup group = (AbstractBTreeGroup)behaviour;
+                        if (Array.Exists(interuptRootGroups, root => root == group.groupName))
+                        {
+                            group = (AbstractBTreeGroup)behaviour.GetRoot();
+                            interruptGroups.Add(group.groupName);
+                        }
                     }
                 }
             }
             tickBehaviour.GroupsAsObservable().Subscribe(groups =>
             {
-                foreach (AbstractBTreeBehaviour behaviour in behaviours)
+                BehaviourTree[] interruptTrees = groups.Where(keyPair => interruptGroups.Contains(keyPair.Key)).ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToArray();
+                subscription = Observable.ToObservable(children).SelectMany(behaviour => Observable.AsObservable(behaviour.GetRoot().GetBehaviourTree().OnExecute())).BatchFrame().Subscribe(states =>
                 {
-                    if (!behaviour.enabled)
+                    if (states.Any(state => interruptOnStates.Contains(state)))
                     {
-                        continue;
+                        foreach (BehaviourTree tree in interruptTrees)
+                        {
+                            tree.Lock();
+                        }
                     }
-                    if (Array.Exists(behaviour.parents, parent => parent == groupName))
+                    else if (states.Any(state => !interruptOnStates.Contains(BehaviourTree.State.WAITING) && state != BehaviourTree.State.WAITING))
                     {
-                        new InterruptTreeNode(
-                            behaviour.GetRoot().GetBehaviourTree(),
-                            interruptOnStates,
-                            groups.Where(keyPair => interruptGroups.Contains(keyPair.Key))
-                                .ToDictionary(pair => pair.Key, pair => pair.Value).Values.ToArray()
-                       );
+                        foreach (BehaviourTree tree in interruptTrees)
+                        {
+                            tree.Unlock();
+                        }
                     }
-                }
+                });
             });
         }
-    }
 
-    class InterruptTreeNode : BehaviourTree.Node
-    {
-        private BehaviourTree.State[] interruptOnStates;
-        private BehaviourTree[] interruptTrees;
-
-        public InterruptTreeNode(
-            BehaviourTree.Node child, 
-            BehaviourTree.State[] interruptOnStates, 
-            BehaviourTree[] interruptTrees
-            ) : base(new BehaviourTree.Node[] { child })
+        protected override void RaiseOnCompletedOnDestroy()
         {
-            this.interruptOnStates = interruptOnStates;
-            this.interruptTrees = interruptTrees;
-        }
-
-        public override BehaviourTree.Node[] GetNextChildren()
-        {
-            return children[0].IsTerminated() ? new BehaviourTree.Node[] { } : children;
-        }
-
-        protected override void Execute(BehaviourTree tree)
-        {
-			children[0].Tick(tree);
-        }
-
-        protected override void OnExecute(BehaviourTree.Node child)
-        {
-            if (interruptOnStates.Contains(child.State))
-            {
-                foreach (BehaviourTree tree in interruptTrees)
-                {
-                    tree.Lock();
-                }
-            }
-            else if (!interruptOnStates.Contains(BehaviourTree.State.WAITING) && child.State != BehaviourTree.State.WAITING)
-            {
-                foreach (BehaviourTree tree in interruptTrees)
-                {
-                    tree.Unlock();
-                }
-            }
+            subscription.Dispose();
         }
     }
 }

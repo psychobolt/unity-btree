@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using BTree;
 using UnityEngine;
 
@@ -11,13 +8,8 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
 {
     public float damageTime = 1.0f;
     public float reviveTime = 1.0f;
-	public float cooldownTime = 0.0f;
+    public float cooldownTime = 0.0f;
 
-	public enum HitType {
-		HP_PRECENTAGE,
-		DMG_PERCENTAGE,
-		POINTS
-	}
 	public HitType hitType;
     public int hitValue;
     public int revivePrecentage = 100;
@@ -81,7 +73,7 @@ public class TakeDamageBehaviour : AbstractBTreeBehaviour
         }
         if (node.Result == 0)
         {
-			animationController.TakeDamage(deltaHP);
+			animationController.TakeDamage(hitType, deltaHP);
         }
         node.Result += Time.deltaTime;
         if (node.Result > damageTime)

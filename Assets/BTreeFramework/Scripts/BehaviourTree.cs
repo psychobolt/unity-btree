@@ -21,11 +21,9 @@ namespace BTree
         {
 			protected internal State State { 
 				set {
-					if (_state != value) {
-						_state = value;
-						observable.OnNext(_state);
-					}
-				}
+                    _state = value;
+                    observable.OnNext(_state);
+                }
 				get { return _state; } 
 			}
             protected Node[] children;
@@ -84,7 +82,7 @@ namespace BTree
                 }
             }
 
-			protected IObservable<State> OnExecute() {
+			public IObservable<State> OnExecute() {
 				return observable;
 			}
 

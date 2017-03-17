@@ -56,9 +56,9 @@ GameObject:
   - component: {fileID: 114821638352304396}
   - component: {fileID: 114287763505879726}
   - component: {fileID: 114739530176530846}
+  - component: {fileID: 114470370649165900}
   - component: {fileID: 114569496700490100}
   - component: {fileID: 114384283023925452}
-  - component: {fileID: 114470370649165900}
   - component: {fileID: 114062522275778984}
   - component: {fileID: 114951542958927204}
   - component: {fileID: 114396834857286634}
@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 114714503919773646}
   - component: {fileID: 114573258265386016}
   - component: {fileID: 114741690933772596}
+  - component: {fileID: 114284068394199310}
   m_Layer: 0
   m_Name: DeathBossAI
   m_TagString: Enemy
@@ -1801,6 +1802,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBodyCollision: 1
+--- !u!114 &114284068394199310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1212820436488222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10bf3355f08564ef88281134754c3131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groupName: Death
+  interuptRootGroups:
+  - TakeDamage
+  interruptOnStates: 04000000
 --- !u!114 &114287763505879726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1860,7 +1876,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1212820436488222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c5fdbe257a4fb94fbbe6bbc73919bc2, type: 3}
   m_Name: 
@@ -1925,7 +1941,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parents:
-  - TakeDamage
+  - 
+  - Death
   - Halt
   damageTime: 9
   reviveTime: 1
@@ -2036,7 +2053,7 @@ MonoBehaviour:
   groupName: Halt
   interuptRootGroups:
   - Attack
-  interruptOnStates: 0400000002000000
+  interruptOnStates: 04000000
 --- !u!114 &114759973668179294
 MonoBehaviour:
   m_ObjectHideFlags: 1

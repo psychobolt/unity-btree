@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 public abstract class AbstractAnimationController : MonoBehaviour
@@ -22,7 +20,7 @@ public abstract class AbstractAnimationController : MonoBehaviour
 
     public abstract void Wake();
 
-	public abstract void TakeDamage(float damage);
+	public abstract void TakeDamage(HitType hitType, float damage);
 
     public abstract void Revive();
 

@@ -41,19 +41,27 @@ public class DeathAnimationController : AbstractAnimationController
         animator.SetBool("idle", false);
     }
 
-	public override void TakeDamage(float damage)
+	public override void TakeDamage(HitType hitType, float damage)
     {
 		ResetState();
 		animator.SetBool("idle", false);
-		if (damage == 10) {
-			spriteRenderer.enabled = false;
-			takeDamage.SetActive(true);
-		} else {
-            takeDamage.SetActive(false);
-            spriteRenderer.enabled = true;
-            animator.SetBool("disappear", true);
-	        animator.SetBool("appear", false);
+        if (hitType == HitType.POINTS)
+        {
+            spriteRenderer.enabled = false;
+            takeDamage.SetActive(true);
         }
+        else
+        {
+            Disappear();
+        }
+    }
+
+    private void Disappear()
+    {
+        takeDamage.SetActive(false);
+        spriteRenderer.enabled = true;
+        animator.SetBool("disappear", true);
+        animator.SetBool("appear", false);
     }
 
     public override void Revive()
