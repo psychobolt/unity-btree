@@ -1744,7 +1744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1131734831181630, guid: bee82cfa119e6a74fb346d6377719bff, type: 2}
-  target: {fileID: 1214755505834582, guid: 245ce81c1412ee845b8c5f4b4375797d, type: 2}
+  target: {fileID: 0}
   fireFrom: {fileID: 1152041603085122}
   projectileVelocity: 5
   fireDelay: 1
@@ -1989,7 +1989,7 @@ MonoBehaviour:
   numberOfProjectiles: 5
   prefab: {fileID: 1598934600016450, guid: 4fd8acba30d0a3448a1dd14c35b5841f, type: 2}
   fireFrom: {fileID: 1152041603085122}
-  target: {fileID: 1214755505834582, guid: 245ce81c1412ee845b8c5f4b4375797d, type: 2}
+  target: {fileID: 0}
   projectileVelocity: 5
   fireDelay: 1
   fireRate: 2

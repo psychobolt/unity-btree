@@ -17,9 +17,9 @@ BTree is firsthand designed for extensibility and for developers who want to use
   - [x] Groupable hierarchy
 - [ ] Tree Graph Editor
 - [ ] Example projects
-  - [x] [2D Scene](Assets/BTreeFramework/Examples/README.md)
+  - [x] [2D Scene](Assets/BTreeFramework/Examples/Sample2D-Scenes/README.md)
     - [x] Pathfinding
-  - [] 3D Scene
+  - [ ] 3D Scene
 
 ## Usage
 
