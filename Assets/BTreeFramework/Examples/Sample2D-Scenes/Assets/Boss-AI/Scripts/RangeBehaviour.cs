@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using BTree;
+﻿using BTree;
+using Sample2D;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyActor))]
@@ -30,7 +28,7 @@ public class RangeBehaviour : AbstractBTreeBehaviour
         foreach (Component component in gameObject.GetComponents(typeof(AbstractProjectileBehaviour)))
         {
             AbstractProjectileBehaviour behavior = (AbstractProjectileBehaviour)component;
-            if (component.GetType().ToString() == projectileBehaviorName)
+            if (component.GetType().Name == projectileBehaviorName)
             {
                 projectileBehavior = behavior;
                 projectileBehavior.enabled = false;

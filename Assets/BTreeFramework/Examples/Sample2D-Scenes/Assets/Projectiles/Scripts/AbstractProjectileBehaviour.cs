@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public abstract class AbstractProjectileBehaviour : MonoBehaviour
+namespace Sample2D
 {
-    public abstract void Fire();
+    public abstract class AbstractProjectileBehaviour : MonoBehaviour
+    {
+        public abstract void Fire();
+    }
 }

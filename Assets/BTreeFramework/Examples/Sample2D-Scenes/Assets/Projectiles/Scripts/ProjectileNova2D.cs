@@ -1,65 +1,66 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class ProjectileNova2D : AbstractProjectileBehaviour {
-
-    public int numberOfProjectiles;
-    public GameObject prefab;
-    public GameObject fireFrom;
-    public float projectileVelocity;
-    public float fireDelay;
-    public float fireRate;
-
-    // Use this for initialization
-    void Start()
+namespace Sample2D
+{
+    public class ProjectileNova2D : AbstractProjectileBehaviour
     {
 
-    }
+        public int numberOfProjectiles;
+        public GameObject prefab;
+        public GameObject fireFrom;
+        public float projectileVelocity;
+        public float fireDelay;
+        public float fireRate;
 
-    // Update is called once per frame
-    void Update()
-    {
-        //Decrement timer until its time to fire
-        if (fireDelay > 1.0)
+        // Use this for initialization
+        void Start()
         {
-            fireDelay -= Time.deltaTime;
+
         }
-        //Fire
-        else
+
+        // Update is called once per frame
+        void Update()
         {
-            Fire();
-            //Reset the fire timer
-            fireDelay += fireRate;
+            //Decrement timer until its time to fire
+            if (fireDelay > 1.0)
+            {
+                fireDelay -= Time.deltaTime;
+            }
+            //Fire
+            else
+            {
+                Fire();
+                //Reset the fire timer
+                fireDelay += fireRate;
+            }
         }
-    }
 
-    //Calculate the position of each projectile around the character
-    Vector2 getProjectilePosition(Vector2 center, int count, float r)
-    {
-        Vector2 position;
-        float ang = 360 / numberOfProjectiles * count;
-        position.x = center.x + r * Mathf.Sin(ang * Mathf.Deg2Rad);
-        position.y = center.y + r * Mathf.Cos(ang * Mathf.Deg2Rad);
-        return position;
-    }
-
-    public override void Fire()
-    {
-        Vector2 center = transform.position;
-        for (int i = 0; i < numberOfProjectiles; i++)
+        //Calculate the position of each projectile around the character
+        Vector2 getProjectilePosition(Vector2 center, int count, float r)
         {
-            //Get the projectile position with the given center
-            Vector2 pos = getProjectilePosition(center, i, 0.5f);
+            Vector2 position;
+            float ang = 360 / numberOfProjectiles * count;
+            position.x = center.x + r * Mathf.Sin(ang * Mathf.Deg2Rad);
+            position.y = center.y + r * Mathf.Cos(ang * Mathf.Deg2Rad);
+            return position;
+        }
 
-            //Get the rotation each projectile should have 
-            Quaternion rot = Quaternion.FromToRotation(Vector2.left, pos - center);
+        public override void Fire()
+        {
+            Vector2 center = transform.position;
+            for (int i = 0; i < numberOfProjectiles; i++)
+            {
+                //Get the projectile position with the given center
+                Vector2 pos = getProjectilePosition(center, i, 0.5f);
 
-            //Instantiate each projectile and give a velocity in each's forward direction
-            GameObject projectile = Instantiate(prefab, pos, rot);
-            Rigidbody2D rigidbody = projectile.GetComponent<Rigidbody2D>();
-            rigidbody.velocity = (pos - center).normalized * projectileVelocity;
+                //Get the rotation each projectile should have 
+                Quaternion rot = Quaternion.FromToRotation(Vector2.left, pos - center);
+
+                //Instantiate each projectile and give a velocity in each's forward direction
+                GameObject projectile = Instantiate(prefab, pos, rot);
+                Rigidbody2D rigidbody = projectile.GetComponent<Rigidbody2D>();
+                rigidbody.velocity = (pos - center).normalized * projectileVelocity;
+            }
         }
     }
 }
