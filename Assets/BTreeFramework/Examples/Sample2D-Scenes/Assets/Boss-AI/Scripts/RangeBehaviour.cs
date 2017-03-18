@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using BTree;
 using UnityEngine;
 
+[RequireComponent(typeof(EnemyActor))]
+[RequireComponent(typeof(CollisionController))]
 [RequireComponent(typeof(CircleCollider2D))]
-[RequireComponent(typeof(Rigidbody2D))]
 [AddComponentMenu("AI Behaviour Tree/Range Attack")]
 public class RangeBehaviour : AbstractBTreeBehaviour
 {

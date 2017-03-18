@@ -6,7 +6,7 @@ using UniRx.Triggers;
 
 namespace BTree
 {
-    public class BTreeInterruptBehaviour : ObservableTriggerBase
+    public class BTreeInterruptGroup : ObservableTriggerBase
     {
 
         public string groupName;

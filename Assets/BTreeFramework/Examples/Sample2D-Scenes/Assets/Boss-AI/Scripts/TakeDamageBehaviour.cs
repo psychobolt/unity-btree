@@ -2,7 +2,6 @@ using BTree;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyActor))]
-[RequireComponent(typeof(BTreeSelectorGroup))]
 [AddComponentMenu("AI Behaviour Tree/Take Damage")]
 public class TakeDamageBehaviour : AbstractBTreeBehaviour
 {

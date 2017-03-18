@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using BTree;
+using Steer2D;
 using System.Collections.Generic;
 using System.Linq;
-using BTree;
-using Steer2D;
 using UniRx;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyActor))]
-[RequireComponent(typeof(BTreeSelectorGroup))]
+[RequireComponent(typeof(CollisionController))]
 [RequireComponent(typeof(CircleCollider2D))]
 [RequireComponent(typeof(Seek))]
+[RequireComponent(typeof(Pathfinding2D))]
 [AddComponentMenu("AI Behaviour Tree/Melee Attack")]
 public class MeleeBehaviour : AbstractBTreeBehaviour
 {
