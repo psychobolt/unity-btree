@@ -4,7 +4,7 @@
 
 ### Death AI Pathfinding
 
-<img width=500 src="https://cdn.discordapp.com/attachments/243150423857430529/285604521198092288/Unity_2017-02-26_18-43-11-41.gif" />
+<img width="500" src="Assets/Boss-AI/Death/preview.gif" />
 
 Simple scene for testing pathfinding and mechanim states. AI will respawn upon death or low health (< 50%)
 
